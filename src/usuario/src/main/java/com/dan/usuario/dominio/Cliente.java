@@ -1,14 +1,13 @@
 package com.dan.usuario.dominio;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
 public class Cliente {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String razonSocial;
     private String cuit;
@@ -16,7 +15,8 @@ public class Cliente {
     private BigDecimal maximoCuentaCorriente;
     private Boolean habilitadoOnline;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
     public Cliente() {

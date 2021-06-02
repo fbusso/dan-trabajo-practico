@@ -1,16 +1,9 @@
-CREATE TABLE tipo_usuario
-(
-    id   SERIAL PRIMARY KEY,
-    tipo VARCHAR(50) UNIQUE NOT NULL
-);
-
 CREATE TABLE usuario
 (
-    id              SERIAL PRIMARY KEY,
-    usuario         VARCHAR(20) UNIQUE NOT NULL,
-    password        VARCHAR(50)        NOT NULL,
-    tipo_usuario_id INTEGER,
-    CONSTRAINT fk_tipo_usuario FOREIGN KEY (tipo_usuario_id) REFERENCES tipo_usuario (id)
+    id             SERIAL PRIMARY KEY,
+    nombre_usuario VARCHAR(20) UNIQUE NOT NULL,
+    password       VARCHAR(50)        NOT NULL,
+    tipo_usuario   VARCHAR(20)        NOT NULL
 );
 
 CREATE TABLE empleado
@@ -33,32 +26,15 @@ CREATE TABLE cliente
     CONSTRAINT fk_usuario FOREIGN KEY (usuario_id) REFERENCES usuario (id)
 );
 
-CREATE TABLE tipo_obra
-(
-    id   SERIAL PRIMARY KEY,
-    tipo VARCHAR(100) UNIQUE NOT NULL
-);
-
 CREATE TABLE obra
 (
-    id           SERIAL PRIMARY KEY,
-    descripcion  VARCHAR(255) NOT NULL,
-    direccion    VARCHAR(100) NOT NULL UNIQUE,
-    latitud      REAL         NOT NULL,
-    longitud     REAL         NOT NULL,
-    superficie   INTEGER      NOT NULL,
-    tipo_obra_id INTEGER      NOT NULL,
-    cliente_id   INTEGER      NOT NULL,
-    CONSTRAINT fk_cliente FOREIGN KEY (cliente_id) REFERENCES cliente (id),
-    CONSTRAINT fk_tipo_obra FOREIGN KEY (tipo_obra_id) REFERENCES tipo_obra (id)
+    id          SERIAL PRIMARY KEY,
+    descripcion VARCHAR(255) NOT NULL,
+    direccion   VARCHAR(100) NOT NULL UNIQUE,
+    latitud     REAL         NOT NULL,
+    longitud    REAL         NOT NULL,
+    superficie  INTEGER      NOT NULL,
+    tipo_obra   VARCHAR(20)  NOT NULL,
+    cliente_id  INTEGER      NOT NULL,
+    CONSTRAINT fk_cliente FOREIGN KEY (cliente_id) REFERENCES cliente (id)
 );
-
-INSERT INTO tipo_obra (tipo)
-VALUES ('Reforma'),
-       ('Casa'),
-       ('Edificio'),
-       ('Vial');
-
-INSERT INTO tipo_usuario (tipo)
-VALUES ('Cliente'),
-       ('Vendedor');
