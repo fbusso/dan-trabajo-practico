@@ -1,0 +1,63 @@
+version: '3.8'
+services:
+    db-ms-usuario:
+        container_name: cliente-db
+        image: postgres
+        restart: always
+        environment:
+            POSTGRES_USER: cliente_application
+            POSTGRES_PASSWORD: nvhYPZk74dAjkSJQ
+            POSTGRES_DB: cliente-db
+        ports:
+            - '5432:5432'
+
+    db-ms-puerto:
+        container_name: puerto-db
+        image: postgres
+        restart: always
+        environment:
+            POSTGRES_USER: pedido_application
+            POSTGRES_PASSWORD: PM4YSbMp5mpCjej2
+            POSTGRES_DB: puerto-db
+        ports:
+            - '5433:5432'
+
+    db-ms-producto:
+        container_name: producto-db
+        image: postgres
+        restart: always
+        environment:
+            POSTGRES_USER: producto_application
+            POSTGRES_PASSWORD: b8DNZsX7WDhFaep4
+            POSTGRES_DB: producto-db
+        ports:
+            - '5434:5432'
+
+    db-ms-pedido:
+        container_name: pedido-db
+        image: postgres
+        restart: always
+        environment:
+            POSTGRES_USER: pedido_application
+            POSTGRES_PASSWORD: mPDU3zdk8wvyw4Ft
+            POSTGRES_DB: pedido-db
+        ports:
+            - '5435:5432'
+
+    db-ms-cuenta:
+        container_name: cuenta-db
+        image: postgres
+        restart: always
+        environment:
+            POSTGRES_USER: cuenta_application
+            POSTGRES_PASSWORD: U5zRu6Vgmx6PmrmU
+            POSTGRES_DB: cuenta-db
+        ports:
+            - '5436:5432'
+
+    rabbit-mq:
+        container_name: cola-mensajes
+        image: rabbitmq:management
+        ports:
+            - "5672:5672"
+            - "15672:15672"
