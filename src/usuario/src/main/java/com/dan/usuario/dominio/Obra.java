@@ -1,5 +1,7 @@
 package com.dan.usuario.dominio;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,7 +19,9 @@ public class Obra {
     @Enumerated(EnumType.STRING)
     private TipoObra tipoObra;
 
+    @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
     public Integer getId() {

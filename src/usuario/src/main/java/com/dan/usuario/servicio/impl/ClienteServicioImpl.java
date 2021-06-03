@@ -1,7 +1,6 @@
 package com.dan.usuario.servicio.impl;
 
 import com.dan.usuario.dominio.Cliente;
-import com.dan.usuario.dominio.TipoUsuario;
 import com.dan.usuario.dominio.Usuario;
 import com.dan.usuario.repositorio.ClienteRepositorio;
 import com.dan.usuario.servicio.ClienteServicio;
@@ -25,9 +24,13 @@ public class ClienteServicioImpl implements ClienteServicio {
     @Override
     public Cliente crear(Cliente cliente) {
         Usuario usuario = usuarioServicio.crearUsuarioCliente(cliente.getUsuario());
-        cliente.setHabilitadoOnline(false);
         cliente.setUsuario(usuario);
         return clienteRepositorio.save(cliente);
+    }
+
+    @Override
+    public Cliente obtenerReferencia(Integer clienteId) {
+        return clienteRepositorio.getById(clienteId);
     }
 
     @Override

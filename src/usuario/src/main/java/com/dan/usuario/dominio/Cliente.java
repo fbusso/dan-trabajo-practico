@@ -2,6 +2,7 @@ package com.dan.usuario.dominio;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 public class Cliente {
@@ -16,8 +17,14 @@ public class Cliente {
     private Boolean habilitadoOnline;
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "usuario_id")
+    @JoinTable(
+            name = "usuario_cliente",
+            joinColumns = {@JoinColumn(name = "cliente_id")},
+            inverseJoinColumns = {@JoinColumn(name = "usuario_id")})
     private Usuario usuario;
+
+    @OneToMany(mappedBy = "cliente", orphanRemoval = true)
+    private List<Obra> obras;
 
     public Cliente() {
     }
@@ -76,5 +83,13 @@ public class Cliente {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public List<Obra> getObras() {
+        return obras;
+    }
+
+    public void setObras(List<Obra> obras) {
+        this.obras = obras;
     }
 }

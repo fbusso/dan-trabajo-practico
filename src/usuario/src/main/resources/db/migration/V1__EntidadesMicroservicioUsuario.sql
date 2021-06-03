@@ -8,10 +8,8 @@ CREATE TABLE usuario
 
 CREATE TABLE empleado
 (
-    id         SERIAL PRIMARY KEY,
-    email      VARCHAR(50) NOT NULL,
-    usuario_id INTEGER     NOT NULL,
-    CONSTRAINT fk_usuario FOREIGN KEY (usuario_id) REFERENCES usuario (id)
+    id   SERIAL PRIMARY KEY,
+    mail VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE cliente
@@ -21,9 +19,7 @@ CREATE TABLE cliente
     cuit                    VARCHAR(11) UNIQUE NOT NULL,
     mail                    VARCHAR(50) UNIQUE NOT NULL,
     maximo_cuenta_corriente NUMERIC(19, 2),
-    habilitado_online       BOOLEAN            NOT NULL DEFAULT FALSE,
-    usuario_id              INTEGER            NOT NULL,
-    CONSTRAINT fk_usuario FOREIGN KEY (usuario_id) REFERENCES usuario (id)
+    habilitado_online       BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE obra
@@ -38,3 +34,15 @@ CREATE TABLE obra
     cliente_id  INTEGER      NOT NULL,
     CONSTRAINT fk_cliente FOREIGN KEY (cliente_id) REFERENCES cliente (id)
 );
+
+CREATE TABLE usuario_empleado
+(
+    usuario_id  INTEGER NOT NULL REFERENCES usuario (id),
+    empleado_id INTEGER NOT NULL REFERENCES empleado (id)
+);
+
+CREATE TABLE usuario_cliente
+(
+    usuario_id INTEGER NOT NULL REFERENCES usuario (id),
+    cliente_id INTEGER NOT NULL REFERENCES cliente (id)
+)

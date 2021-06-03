@@ -9,6 +9,8 @@ public interface ClienteServicio {
 
     Cliente crear(Cliente cliente);
 
+    Cliente obtenerReferencia(Integer clienteId);
+
     List<Cliente> obtenerTodos();
 
     Optional<Cliente> buscarPorCuit(String cuit);
