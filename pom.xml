@@ -10,9 +10,9 @@
 
     <modules>
         <module>src/usuario</module>
+        <module>src/pedido</module>
 <!--        <module>src/cliente</module>
         <module>src/producto</module>
-        <module>src/pedido</module>
         <module>src/cuenta</module>-->
     </modules>
 
