@@ -1,73 +1,20 @@
 version: '3.8'
 services:
     db-ms-usuario:
-        container_name: usuario-db
+        container_name: postgres
         image: postgres
         restart: always
+        volumes:
+        -   ./resources/build-database.sql:/docker-entrypoint-initdb.d/init.sql
         environment:
-            POSTGRES_USER: usuario_application
-            POSTGRES_PASSWORD: AQG5VAEZCKBzEwFg
-            POSTGRES_DB: usuario-db
+            POSTGRES_USER: database_user
+            POSTGRES_PASSWORD: TWSsy9Le647u9wnU
+            POSTGRES_DATABSAE: postgres
         ports:
             - '5432:5432'
 
-    db-ms-cliente:
-        container_name: cliente-db
-        image: postgres
-        restart: always
-        environment:
-            POSTGRES_USER: cliente_application
-            POSTGRES_PASSWORD: nvhYPZk74dAjkSJQ
-            POSTGRES_DB: cliente-db
-        ports:
-            - '5433:5432'
-
-    db-ms-puerto:
-        container_name: puerto-db
-        image: postgres
-        restart: always
-        environment:
-            POSTGRES_USER: pedido_application
-            POSTGRES_PASSWORD: PM4YSbMp5mpCjej2
-            POSTGRES_DB: puerto-db
-        ports:
-            - '5434:5432'
-
-    db-ms-producto:
-        container_name: producto-db
-        image: postgres
-        restart: always
-        environment:
-            POSTGRES_USER: producto_application
-            POSTGRES_PASSWORD: b8DNZsX7WDhFaep4
-            POSTGRES_DB: producto-db
-        ports:
-            - '5435:5432'
-
-    db-ms-pedido:
-        container_name: pedido-db
-        image: postgres
-        restart: always
-        environment:
-            POSTGRES_USER: pedido_application
-            POSTGRES_PASSWORD: mPDU3zdk8wvyw4Ft
-            POSTGRES_DB: pedido-db
-        ports:
-            - '5436:5432'
-
-    db-ms-cuenta:
-        container_name: cuenta-db
-        image: postgres
-        restart: always
-        environment:
-            POSTGRES_USER: cuenta_application
-            POSTGRES_PASSWORD: U5zRu6Vgmx6PmrmU
-            POSTGRES_DB: cuenta-db
-        ports:
-            - '5437:5432'
-
     rabbit-mq:
-        container_name: cola-mensajes
+        container_name: rabbit-mq
         image: rabbitmq:management
         ports:
             - "5672:5672"
