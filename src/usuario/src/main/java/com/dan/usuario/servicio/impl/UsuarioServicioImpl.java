@@ -16,8 +16,8 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public Usuario crearUsuarioCliente(Usuario usuario) {
-        usuario.setTipoUsuario(TipoUsuario.CLIENTE);
+    public Usuario crearUsuario(Usuario usuario, TipoUsuario tipoUsuario) {
+        usuario.setTipoUsuario(tipoUsuario);
         return usuarioRepositorio.save(usuario);
     }
 
