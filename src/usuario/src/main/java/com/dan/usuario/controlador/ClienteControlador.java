@@ -24,11 +24,6 @@ public class ClienteControlador {
         return new ResponseEntity<>(clienteServicio.crear(cliente), HttpStatus.CREATED);
     }
 
-    @PutMapping
-    public ResponseEntity<Cliente> actualizar(@RequestBody Cliente cliente) {
-        return new ResponseEntity<>(clienteServicio.actualizar(cliente), HttpStatus.OK);
-    }
-
     @GetMapping
     public ResponseEntity<List<Cliente>> obtenerTodos() {
         return ResponseEntity.ok(clienteServicio.obtenerTodos());
@@ -47,11 +42,5 @@ public class ClienteControlador {
                 : clienteServicio.buscarPorRazonSocial(razonSocial);
 
         return ResponseEntity.ok(clientes);
-    }
-
-    @DeleteMapping("/id/{id}")
-    public HttpStatus eliminarPorId(@PathVariable Integer id) {
-        clienteServicio.eliminarPorId(id);
-        return HttpStatus.NO_CONTENT;
     }
 }

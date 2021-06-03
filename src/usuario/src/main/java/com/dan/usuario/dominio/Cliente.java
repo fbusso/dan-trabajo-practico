@@ -1,14 +1,14 @@
 package com.dan.usuario.dominio;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
 public class Cliente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String razonSocial;
     private String cuit;
@@ -16,15 +16,8 @@ public class Cliente {
     private BigDecimal maximoCuentaCorriente;
     private Boolean habilitadoOnline;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinTable(
-            name = "usuario_cliente",
-            joinColumns = {@JoinColumn(name = "cliente_id")},
-            inverseJoinColumns = {@JoinColumn(name = "usuario_id")})
+    @OneToOne
     private Usuario usuario;
-
-    @OneToMany(mappedBy = "cliente", orphanRemoval = true)
-    private List<Obra> obras;
 
     public Cliente() {
     }
@@ -83,13 +76,5 @@ public class Cliente {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-
-    public List<Obra> getObras() {
-        return obras;
-    }
-
-    public void setObras(List<Obra> obras) {
-        this.obras = obras;
     }
 }
