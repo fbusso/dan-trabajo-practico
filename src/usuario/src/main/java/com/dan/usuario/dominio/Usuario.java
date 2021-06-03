@@ -2,19 +2,19 @@ package com.dan.usuario.dominio;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Usuario {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String usuario;
+    private String nombreUsuario;
     private String password;
 
-/*    @ManyToOne
-    private TipoUsuario tipoUsuario;*/
+    @Enumerated(EnumType.STRING)
+    private TipoUsuario tipoUsuario;
 
     public Usuario() {
     }
@@ -27,15 +27,14 @@ public class Usuario {
         this.id = id;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getNombreUsuario() {
+        return nombreUsuario;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
+    public void setNombreUsuario(String usuario) {
+        this.nombreUsuario = usuario;
     }
 
-    @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -44,11 +43,11 @@ public class Usuario {
         this.password = password;
     }
 
-/*    public TipoUsuario getTipoUsuario() {
+    public TipoUsuario getTipoUsuario() {
         return tipoUsuario;
     }
 
     public void setTipoUsuario(TipoUsuario tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
-    }*/
+    }
 }
