@@ -2,6 +2,7 @@ package com.dan.usuario.dominio;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -13,6 +14,7 @@ public class Cliente {
     private String razonSocial;
     private String cuit;
     private String mail;
+    private LocalDate fechaBaja;
     private BigDecimal maximoCuentaCorriente;
     private Boolean habilitadoOnline;
 
@@ -49,8 +51,8 @@ public class Cliente {
         return cuit;
     }
 
-    public void setCuit(String cuil) {
-        this.cuit = cuil;
+    public void setCuit(String cuit) {
+        this.cuit = cuit;
     }
 
     public String getMail() {
@@ -59,6 +61,14 @@ public class Cliente {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public LocalDate getFechaBaja() {
+        return fechaBaja;
+    }
+
+    public void setFechaBaja(LocalDate fechaBaja) {
+        this.fechaBaja = fechaBaja;
     }
 
     public BigDecimal getMaximoCuentaCorriente() {

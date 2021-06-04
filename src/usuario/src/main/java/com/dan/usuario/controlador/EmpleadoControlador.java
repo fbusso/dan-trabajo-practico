@@ -1,6 +1,7 @@
 package com.dan.usuario.controlador;
 
 import com.dan.usuario.dominio.Empleado;
+import com.dan.usuario.excepcion.ReglaDeNegociosExcepcion;
 import com.dan.usuario.servicio.EmpleadoServicio;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ public class EmpleadoControlador {
     }
 
     @PostMapping
-    public ResponseEntity<Empleado> crear(@RequestBody Empleado empleado) {
+    public ResponseEntity<Empleado> crear(@RequestBody Empleado empleado) throws ReglaDeNegociosExcepcion {
         return new ResponseEntity<>(empleadoServicio.crear(empleado), HttpStatus.CREATED);
     }
 
