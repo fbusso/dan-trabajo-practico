@@ -53,6 +53,11 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
+    public Optional<Cliente> obtenerPorId(Integer id) {
+        return clienteRepositorio.findById(id);
+    }
+
+    @Override
     public Optional<Cliente> buscarPorCuit(String cuit) {
         return clienteRepositorio.findFirstByCuitAndFechaBajaNotNull(cuit);
     }
@@ -64,8 +69,7 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     @Override
     public void eliminarPorId(Integer id) throws ReglaDeNegociosExcepcion {
-        Optional<Cliente> clienteOptional = clienteRepositorio.findById(id);
-        clienteValidador.validarEliminacion(clienteOptional);
+        clienteValidador.validarEliminacion(id);
         clienteRepositorio.deleteById(id);
     }
 

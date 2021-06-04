@@ -1,5 +1,7 @@
 package com.dan.usuario.servicio.impl;
 
+import com.dan.usuario.excepcion.ErrorDeConexionExcepcion;
+import com.dan.usuario.excepcion.ReglaDeNegociosExcepcion;
 import com.dan.usuario.servicio.HttpServicio;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -15,18 +17,18 @@ public class HttpServicioImpl implements HttpServicio {
 
     // TODO: Manejar flujo de errores
     @Override
-    public <T> T get(Class<T> cast, String url, Object ...args) {
+    public <T> T get(Class<T> tipo, String url, Object ...args) throws ReglaDeNegociosExcepcion {
 
-        T dto = null;
+        T dto;
         try {
             dto = webClient
                     .get()
                     .uri(url, args)
                     .retrieve()
-                    .bodyToMono(cast)
+                    .bodyToMono(tipo)
                     .block();
         } catch (Exception e) {
-//            throw new SituacionCrediticiaExcepcion();
+            throw new ErrorDeConexionExcepcion();
         }
 
         return dto;

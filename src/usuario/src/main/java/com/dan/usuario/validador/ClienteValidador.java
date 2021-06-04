@@ -12,5 +12,5 @@ public interface ClienteValidador {
 
     void validadrCreacion(Cliente cliente) throws ReglaDeNegociosExcepcion;
 
-    void validarEliminacion(Optional<Cliente> clienteOptional) throws ReglaDeNegociosExcepcion;
+    void validarEliminacion(Integer id) throws ReglaDeNegociosExcepcion;
 }

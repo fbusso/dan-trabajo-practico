@@ -16,6 +16,8 @@ public interface ClienteServicio {
 
     List<Cliente> obtenerTodos();
 
+    Optional<Cliente> obtenerPorId(Integer id);
+
     Optional<Cliente> buscarPorCuit(String cuit);
 
     List<Cliente> buscarPorRazonSocial(String razonSocial);
