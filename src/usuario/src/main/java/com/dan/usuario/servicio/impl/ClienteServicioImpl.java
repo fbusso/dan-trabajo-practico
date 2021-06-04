@@ -23,7 +23,6 @@ public class ClienteServicioImpl implements ClienteServicio {
     private final ClienteValidador clienteValidador;
     private final UsuarioServicio usuarioServicio;
 
-
     public ClienteServicioImpl(ClienteRepositorio clienteRepositorio, ClienteValidador clienteValidador, UsuarioServicio usuarioServicio) {
         this.clienteRepositorio = clienteRepositorio;
         this.clienteValidador = clienteValidador;
@@ -32,8 +31,8 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     @Override
     public Cliente crear(Cliente cliente) throws ReglaDeNegociosExcepcion {
-        clienteValidador.validadrCreacion(cliente);
         Usuario usuario = usuarioServicio.crearUsuario(cliente.getUsuario(), TipoUsuario.CLIENTE);
+        clienteValidador.validadrCreacion(cliente);
         cliente.setUsuario(usuario);
         return clienteRepositorio.save(cliente);
     }

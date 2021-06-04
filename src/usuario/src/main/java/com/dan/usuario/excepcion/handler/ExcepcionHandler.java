@@ -17,5 +17,4 @@ public class ExcepcionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(excepcion, excepcion.getMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 
-
 }

@@ -3,6 +3,7 @@ package com.dan.usuario.servicio.impl;
 import com.dan.usuario.dominio.Empleado;
 import com.dan.usuario.dominio.TipoUsuario;
 import com.dan.usuario.dominio.Usuario;
+import com.dan.usuario.excepcion.ReglaDeNegociosExcepcion;
 import com.dan.usuario.repositorio.EmpleadoRepositorio;
 import com.dan.usuario.servicio.EmpleadoServicio;
 import com.dan.usuario.servicio.UsuarioServicio;
@@ -22,7 +23,7 @@ public class EmpleadoServicioImpl implements EmpleadoServicio {
     }
 
     @Override
-    public Empleado crear(Empleado empleado) {
+    public Empleado crear(Empleado empleado) throws ReglaDeNegociosExcepcion {
         Usuario usuario = usuarioServicio.crearUsuario(empleado.getUsuario(), TipoUsuario.CLIENTE);
         empleado.setUsuario(usuario);
         return empleadoRepositorio.save(empleado);
