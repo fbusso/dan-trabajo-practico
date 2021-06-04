@@ -15,6 +15,7 @@ CREATE TABLE empleado
 CREATE TABLE cliente
 (
     id                      SERIAL PRIMARY KEY,
+    fecha_baja              DATE,
     razon_social            VARCHAR(100)       NOT NULL,
     cuit                    VARCHAR(11) UNIQUE NOT NULL,
     mail                    VARCHAR(50) UNIQUE NOT NULL,

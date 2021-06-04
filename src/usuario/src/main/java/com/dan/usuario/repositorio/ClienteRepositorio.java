@@ -10,7 +10,9 @@ import java.util.Optional;
 @Repository
 public interface ClienteRepositorio extends JpaRepository<Cliente, Integer> {
 
-    List<Cliente> findAllByRazonSocialLike(String razonSocial);
+    List<Cliente> findAllByFechaBajaNotNull();
 
-    Optional<Cliente> findFirstByCuit(String cuit);
+    List<Cliente> findAllByRazonSocialLikeAndFechaBajaNotNull(String razonSocial);
+
+    Optional<Cliente> findFirstByCuitAndFechaBajaNotNull(String cuit);
 }

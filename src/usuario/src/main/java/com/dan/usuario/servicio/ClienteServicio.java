@@ -1,13 +1,14 @@
 package com.dan.usuario.servicio;
 
 import com.dan.usuario.dominio.Cliente;
+import com.dan.usuario.excepcion.ReglaDeNegociosExcepcion;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ClienteServicio {
 
-    Cliente crear(Cliente cliente);
+    Cliente crear(Cliente cliente) throws ReglaDeNegociosExcepcion;
 
     Cliente actualizar(Cliente cliente);
 
@@ -19,6 +20,6 @@ public interface ClienteServicio {
 
     List<Cliente> buscarPorRazonSocial(String razonSocial);
 
-    void eliminarPorId(Integer id);
+    void eliminarPorId(Integer id) throws ReglaDeNegociosExcepcion;
 
 }

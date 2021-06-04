@@ -1,6 +1,7 @@
 package com.dan.usuario.controlador;
 
 import com.dan.usuario.dominio.Cliente;
+import com.dan.usuario.excepcion.ReglaDeNegociosExcepcion;
 import com.dan.usuario.servicio.ClienteServicio;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ public class ClienteControlador {
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> crear(@RequestBody Cliente cliente) {
+    public ResponseEntity<Cliente> crear(@RequestBody Cliente cliente) throws ReglaDeNegociosExcepcion {
         return new ResponseEntity<>(clienteServicio.crear(cliente), HttpStatus.CREATED);
     }
 
@@ -50,7 +51,7 @@ public class ClienteControlador {
     }
 
     @DeleteMapping("/id/{id}")
-    public HttpStatus eliminarPorId(@PathVariable Integer id) {
+    public HttpStatus eliminarPorId(@PathVariable Integer id) throws ReglaDeNegociosExcepcion {
         clienteServicio.eliminarPorId(id);
         return HttpStatus.NO_CONTENT;
     }
