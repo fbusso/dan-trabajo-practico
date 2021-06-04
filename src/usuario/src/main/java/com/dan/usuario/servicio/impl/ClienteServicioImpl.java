@@ -31,8 +31,8 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     @Override
     public Cliente crear(Cliente cliente) throws ReglaDeNegociosExcepcion {
-        Usuario usuario = usuarioServicio.crearUsuario(cliente.getUsuario(), TipoUsuario.CLIENTE);
         clienteValidador.validadrCreacion(cliente);
+        Usuario usuario = usuarioServicio.crearUsuario(cliente.getUsuario(), TipoUsuario.CLIENTE);
         cliente.setUsuario(usuario);
         return clienteRepositorio.save(cliente);
     }

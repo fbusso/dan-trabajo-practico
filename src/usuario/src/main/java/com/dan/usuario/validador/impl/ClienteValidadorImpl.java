@@ -15,18 +15,18 @@ public class ClienteValidadorImpl implements ClienteValidador {
 
     private final WebClient webClient;
 
-    public ClienteValidadorImpl(WebClient.Builder webClientBuilder) {
-        this.webClient = webClientBuilder.build();
+    public ClienteValidadorImpl(WebClient webClient) {
+        this.webClient = webClient;
     }
 
     @Override
     public void validadrCreacion(Cliente cliente) throws ReglaDeNegociosExcepcion {
+
         if (CollectionUtils.isEmpty(cliente.getObras())) {
             throw new ClienteSinObrasExcepcion();
         }
 
         SituacionCrediticiaDto situacionCrediticia;
-
         try {
             final String URL = "http://localhost:9010/api/sitaucion-crediticia/{cuit}";
             situacionCrediticia = webClient
