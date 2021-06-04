@@ -5,7 +5,7 @@ import com.dan.usuario.dominio.Usuario;
 import com.dan.usuario.excepcion.ReglaDeNegociosExcepcion;
 import com.dan.usuario.repositorio.UsuarioRepositorio;
 import com.dan.usuario.servicio.UsuarioServicio;
-import com.dan.usuario.validador.impl.UsuarioValidador;
+import com.dan.usuario.validador.UsuarioValidador;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

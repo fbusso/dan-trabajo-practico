@@ -4,11 +4,12 @@ import com.dan.usuario.dominio.Usuario;
 import com.dan.usuario.excepcion.ReglaDeNegociosExcepcion;
 import com.dan.usuario.excepcion.UsuarioExistenteExcepcion;
 import com.dan.usuario.servicio.UsuarioServicio;
+import com.dan.usuario.validador.UsuarioValidador;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UsuarioValidadorImpl implements UsuarioValidador{
+public class UsuarioValidadorImpl implements UsuarioValidador {
 
     private final UsuarioServicio usuarioServicio;
 

@@ -1,4 +1,4 @@
-package com.dan.usuario.validador.impl;
+package com.dan.usuario.validador;
 
 import com.dan.usuario.dominio.Usuario;
 import com.dan.usuario.excepcion.ReglaDeNegociosExcepcion;

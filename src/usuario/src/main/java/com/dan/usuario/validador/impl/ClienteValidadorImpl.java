@@ -3,6 +3,7 @@ package com.dan.usuario.validador.impl;
 import com.dan.usuario.dominio.Cliente;
 import com.dan.usuario.dto.SituacionCrediticiaDto;
 import com.dan.usuario.excepcion.*;
+import com.dan.usuario.servicio.BcraServicio;
 import com.dan.usuario.validador.ClienteValidador;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -14,9 +15,11 @@ import java.util.Optional;
 public class ClienteValidadorImpl implements ClienteValidador {
 
     private final WebClient webClient;
+    private final BcraServicio bcraServicio;
 
-    public ClienteValidadorImpl(WebClient webClient) {
+    public ClienteValidadorImpl(WebClient webClient, BcraServicio bcraServicio) {
         this.webClient = webClient;
+        this.bcraServicio = bcraServicio;
     }
 
     @Override
@@ -26,18 +29,7 @@ public class ClienteValidadorImpl implements ClienteValidador {
             throw new ClienteSinObrasExcepcion();
         }
 
-        SituacionCrediticiaDto situacionCrediticia;
-        try {
-            final String URL = "http://localhost:9010/api/sitaucion-crediticia/{cuit}";
-            situacionCrediticia = webClient
-                    .get()
-                    .uri(URL, cliente.getCuit())
-                    .retrieve()
-                    .bodyToMono(SituacionCrediticiaDto.class)
-                    .block();
-        } catch (Exception e) {
-            throw new SituacionCrediticiaExcepcion();
-        }
+        SituacionCrediticiaDto situacionCrediticia = bcraServicio.obtenerSituacionCrediticiaPorCuit(cliente.getCuit());
 
         if (situacionCrediticia == null) {
             throw new SituacionCrediticiaExcepcion();
