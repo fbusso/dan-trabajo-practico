@@ -10,6 +10,7 @@ import com.dan.pedido.validador.PedidoValidador;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -45,6 +46,11 @@ public class PedidoServicioImpl implements PedidoServicio {
         });
 
         return pedidoOptional;
+    }
+
+    @Override
+    public List<Pedido> obtenerPorClienteId(Integer clienteId) {
+        return null;
     }
 
     @Override

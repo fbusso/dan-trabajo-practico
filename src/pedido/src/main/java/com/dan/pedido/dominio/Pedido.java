@@ -31,20 +31,20 @@ public class Pedido {
         this.id = id;
     }
 
-    public EstadoPedido getEstadoPedido() {
-        return estadoPedido;
-    }
-
-    public void setEstadoPedido(EstadoPedido estadoPedido) {
-        this.estadoPedido = estadoPedido;
-    }
-
     public LocalDate getFechaPedido() {
         return fechaPedido;
     }
 
     public void setFechaPedido(LocalDate fechaPedido) {
         this.fechaPedido = fechaPedido;
+    }
+
+    public EstadoPedido getEstadoPedido() {
+        return estadoPedido;
+    }
+
+    public void setEstadoPedido(EstadoPedido estadoPedido) {
+        this.estadoPedido = estadoPedido;
     }
 
     public List<DetallePedido> getDetallePedido() {

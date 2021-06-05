@@ -4,6 +4,7 @@ import com.dan.pedido.dominio.DetallePedido;
 import com.dan.pedido.dominio.Pedido;
 import com.dan.pedido.excepcion.ReglaDeNegociosExcepcion;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PedidoServicio {
@@ -15,4 +16,6 @@ public interface PedidoServicio {
     Optional<Pedido> agregarDetalle(Integer id, DetallePedido detalle);
 
     void eliminarPorId(Integer id);
+
+    List<Pedido> obtenerPorClienteId(Integer clienteId);
 }

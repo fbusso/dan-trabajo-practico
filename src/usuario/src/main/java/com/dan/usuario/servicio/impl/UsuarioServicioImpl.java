@@ -1,7 +1,6 @@
 package com.dan.usuario.servicio.impl;
 
-import com.dan.usuario.dominio.TipoUsuario;
-import com.dan.usuario.dominio.Usuario;
+import com.dan.usuario.dominio.*;
 import com.dan.usuario.excepcion.ReglaDeNegociosExcepcion;
 import com.dan.usuario.repositorio.UsuarioRepositorio;
 import com.dan.usuario.servicio.UsuarioServicio;
@@ -22,9 +21,9 @@ public class UsuarioServicioImpl implements UsuarioServicio {
     }
 
     @Override
-    public Usuario crearUsuario(Usuario usuario, TipoUsuario tipoUsuario) throws ReglaDeNegociosExcepcion {
+    public Usuario crearUsuario(Registrable registrable) throws ReglaDeNegociosExcepcion {
+        Usuario usuario = new Usuario(registrable);
         usuarioValidador.validarCreacion(usuario);
-        usuario.setTipoUsuario(tipoUsuario);
         return usuarioRepositorio.save(usuario);
     }
 

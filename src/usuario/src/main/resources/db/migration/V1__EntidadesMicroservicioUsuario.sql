@@ -1,9 +1,9 @@
 CREATE TABLE usuario
 (
     id             SERIAL PRIMARY KEY,
-    nombre_usuario VARCHAR(20) UNIQUE NOT NULL,
+    nombre_usuario VARCHAR(30) UNIQUE NOT NULL,
     password       VARCHAR(50)        NOT NULL,
-    tipo_usuario   VARCHAR(20)        NOT NULL
+    tipo_usuario   VARCHAR(50)        NOT NULL
 );
 
 CREATE TABLE empleado

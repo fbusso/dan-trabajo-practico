@@ -1,12 +1,14 @@
 package com.dan.usuario.dominio;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-public class Cliente {
+public class Cliente implements Registrable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,6 +20,7 @@ public class Cliente {
     private BigDecimal maximoCuentaCorriente;
     private Boolean habilitadoOnline;
 
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinTable(
             name = "usuario_cliente",
@@ -101,5 +104,15 @@ public class Cliente {
 
     public void setObras(List<Obra> obras) {
         this.obras = obras;
+    }
+
+    @Override
+    public String nombreUsuario() {
+        return mail;
+    }
+
+    @Override
+    public TipoUsuario tipoUsuario() {
+        return TipoUsuario.CLIENTE;
     }
 }

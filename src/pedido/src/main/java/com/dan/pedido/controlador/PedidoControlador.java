@@ -2,11 +2,14 @@ package com.dan.pedido.controlador;
 
 import com.dan.pedido.dominio.DetallePedido;
 import com.dan.pedido.dominio.Pedido;
+import com.dan.pedido.excepcion.ReglaDeNegociosExcepcion;
 import com.dan.pedido.servicio.DetallePedidoServicio;
 import com.dan.pedido.servicio.PedidoServicio;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/pedido")
@@ -21,13 +24,18 @@ public class PedidoControlador {
     }
 
     @PostMapping
-    public ResponseEntity<Pedido> crear(@RequestBody Pedido pedido) {
+    public ResponseEntity<Pedido> crear(@RequestBody Pedido pedido) throws ReglaDeNegociosExcepcion {
         return new ResponseEntity<>(pedidoServicio.crear(pedido), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Pedido> obtenerPorId(@PathVariable Integer id) {
         return ResponseEntity.of(pedidoServicio.obtenerPorId(id));
+    }
+
+    @GetMapping("/cliente/{id}")
+    public ResponseEntity<List<Pedido>> obtenerPorClienteId(@PathVariable Integer id) {
+        return ResponseEntity.ok(pedidoServicio.obtenerPorClienteId(id));
     }
 
     @PatchMapping("/{pedidoId}/detalle")
