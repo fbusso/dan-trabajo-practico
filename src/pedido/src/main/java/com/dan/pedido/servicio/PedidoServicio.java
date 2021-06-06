@@ -11,6 +11,8 @@ public interface PedidoServicio {
 
     Pedido crear(Pedido pedido) throws ReglaDeNegociosExcepcion;
 
+    Pedido confirmar(Integer id) throws ReglaDeNegociosExcepcion;
+
     Optional<Pedido> obtenerPorId(Integer id);
 
     Optional<Pedido> agregarDetalle(Integer id, DetallePedido detalle);
@@ -18,4 +20,5 @@ public interface PedidoServicio {
     void eliminarPorId(Integer id);
 
     List<Pedido> obtenerPorClienteId(Integer clienteId);
+
 }

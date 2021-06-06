@@ -1,22 +1,16 @@
-package com.dan.producto.dominio;
+package com.dan.pedido.dto;
 
-import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Entity
-public class Material {
+public class MaterialDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String nombre;
     private String descripcion;
     private BigDecimal precio;
     private Integer stockActual;
     private Integer stockMinimo;
-
-    @Enumerated(EnumType.STRING)
-    private Unidad unidad;
+    private String unidad;
 
     public Integer getId() {
         return id;
@@ -66,11 +60,11 @@ public class Material {
         this.stockMinimo = stockMinimo;
     }
 
-    public Unidad getUnidad() {
+    public String getUnidad() {
         return unidad;
     }
 
-    public void setUnidad(Unidad unidad) {
+    public void setUnidad(String unidad) {
         this.unidad = unidad;
     }
 }

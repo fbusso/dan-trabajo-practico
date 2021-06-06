@@ -1,7 +1,8 @@
 CREATE TABLE medio_pago
 (
-    id          SERIAL PRIMARY KEY,
-    observacion VARCHAR(255) NOT NULL
+    id             SERIAL PRIMARY KEY,
+    observacion    VARCHAR(255) NOT NULL,
+    discriminador VARCHAR(15)  NOT NULL
 );
 
 CREATE TABLE medio_pago_cheque
@@ -33,8 +34,9 @@ CREATE TABLE medio_pago_transferencia
 
 CREATE TABLE pago
 (
-    id           SERIAL PRIMARY KEY,
-    fecha_pago     DATE NOT NULL,
+    id            SERIAL PRIMARY KEY,
+    pedido_id     INTEGER NOT NULL,
+    fecha_pago    DATE    NOT NULL,
     medio_pago_id INTEGER,
     CONSTRAINT fk_medio_pago FOREIGN KEY (medio_pago_id) REFERENCES medio_pago (id)
 );

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -35,6 +36,16 @@ public class ClienteControlador {
         return ResponseEntity.ok(clienteServicio.obtenerTodos());
     }
 
+    @GetMapping("/id/{id}")
+    public ResponseEntity<Cliente> obtenerPorId(@PathVariable Integer id) {
+        return ResponseEntity.of(clienteServicio.obtenerPorId(id));
+    }
+
+    @GetMapping("/obra/id/{id}")
+    public ResponseEntity<Cliente> obtenerPorObraId(@PathVariable Integer id) {
+        return ResponseEntity.of(clienteServicio.obtenerPorObraId(id));
+    }
+
     @GetMapping("/cuit/{cuit}")
     public ResponseEntity<Cliente> obtenerPorCuit(@PathVariable String cuit) {
         return ResponseEntity.of(clienteServicio.buscarPorCuit(cuit));
@@ -48,6 +59,11 @@ public class ClienteControlador {
                 : clienteServicio.buscarPorRazonSocial(razonSocial);
 
         return ResponseEntity.ok(clientes);
+    }
+
+    @GetMapping("/id/{id}/saldo")
+    public ResponseEntity<BigDecimal> obtenerSaldoPorId(@PathVariable Integer id) throws ReglaDeNegociosExcepcion {
+        return ResponseEntity.ok(clienteServicio.obtenerSaldoPorId(id));
     }
 
     @DeleteMapping("/id/{id}")

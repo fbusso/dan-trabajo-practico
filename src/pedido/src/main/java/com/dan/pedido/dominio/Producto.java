@@ -6,6 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 
+// TODO: Esta es una entidad de solo lectura. Revisar.
 @Entity
 public class Producto {
 

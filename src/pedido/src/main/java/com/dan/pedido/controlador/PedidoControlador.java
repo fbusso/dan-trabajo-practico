@@ -47,6 +47,11 @@ public class PedidoControlador {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @PutMapping("/id/{id}")
+    public ResponseEntity<Pedido> confirmar(@PathVariable Integer id) throws ReglaDeNegociosExcepcion {
+        return ResponseEntity.ok(pedidoServicio.confirmar(id));
+    }
+
     @DeleteMapping("/{id}")
     public HttpStatus eliminarPorId(@PathVariable Integer id) {
         pedidoServicio.eliminarPorId(id);

@@ -16,6 +16,7 @@ public class ColaMensajesServicioImpl implements ColaMensajesServicio {
 
     @Override
     public void enviar(Object mensaje) {
+        // TODO: Parametrizar atributos de la cola de mensajes.
         rabbitTemplate.convertAndSend(ConfiguracionRabbitMq.DIRECT_EXCHANGE_NAME, ConfiguracionRabbitMq.ROUTING_KEY, mensaje);
     }
 }

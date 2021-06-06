@@ -1,10 +1,12 @@
 package com.dan.pedido.dominio;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Table(name = "pedido")
 public class Pedido {
 
     @Id
@@ -61,5 +63,12 @@ public class Pedido {
 
     public void setObra(Obra obra) {
         this.obra = obra;
+    }
+
+    public BigDecimal getCostoTotal() {
+        return getDetallePedido()
+                .stream()
+                .map(DetallePedido::getPrecio)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }

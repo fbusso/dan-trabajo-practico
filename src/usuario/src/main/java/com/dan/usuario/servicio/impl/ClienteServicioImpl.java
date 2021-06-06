@@ -13,6 +13,7 @@ import com.dan.usuario.servicio.UsuarioServicio;
 import com.dan.usuario.validador.ClienteValidador;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,6 +59,11 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
+    public Optional<Cliente> obtenerPorObraId(Integer obraId) {
+        return clienteRepositorio.obtenerPorObraId(obraId);
+    }
+
+    @Override
     public Optional<Cliente> buscarPorCuit(String cuit) {
         return clienteRepositorio.findFirstByCuitAndFechaBajaNotNull(cuit);
     }
@@ -73,4 +79,14 @@ public class ClienteServicioImpl implements ClienteServicio {
         clienteRepositorio.deleteById(id);
     }
 
+    @Override
+    public BigDecimal obtenerSaldoPorId(Integer id) throws ClienteNoEncontradoExcepcion {
+        Optional<Cliente> clienteOptional = obtenerPorId(id);
+
+        if (clienteOptional.isEmpty()) {
+            throw new ClienteNoEncontradoExcepcion();
+        }
+
+        return clienteOptional.get().getMaximoCuentaCorriente();
+    }
 }

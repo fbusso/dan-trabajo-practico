@@ -8,4 +8,5 @@ import java.util.List;
 public interface PedidoServicio {
 
     List<PedidoDto> obtenerPorClienteId(Integer id) throws ReglaDeNegociosExcepcion;
+
 }
