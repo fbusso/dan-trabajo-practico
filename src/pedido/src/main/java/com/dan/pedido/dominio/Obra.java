@@ -11,6 +11,7 @@ public class Obra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private Integer clienteId;
     private String descripcion;
 
     public Integer getId() {
@@ -19,6 +20,14 @@ public class Obra {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getClienteId() {
+        return clienteId;
+    }
+
+    public void setClienteId(Integer clienteId) {
+        this.clienteId = clienteId;
     }
 
     public String getDescripcion() {
