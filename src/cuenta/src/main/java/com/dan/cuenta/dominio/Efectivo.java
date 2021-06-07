@@ -4,7 +4,6 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "medio_pago_efectivo")
-@DiscriminatorValue("EFECTIVO")
 @PrimaryKeyJoinColumn(name = "medio_pago_id")
 public class Efectivo extends MedioPago {
 

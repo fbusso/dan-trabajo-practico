@@ -1,8 +1,7 @@
 CREATE TABLE medio_pago
 (
     id             SERIAL PRIMARY KEY,
-    observacion    VARCHAR(255) NOT NULL,
-    discriminador VARCHAR(15)  NOT NULL
+    observacion    VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE medio_pago_cheque

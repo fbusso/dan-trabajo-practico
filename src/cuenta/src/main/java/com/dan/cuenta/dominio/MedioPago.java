@@ -1,10 +1,19 @@
 package com.dan.cuenta.dominio;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import javax.persistence.*;
 
+
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "tipo")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Transferencia.class, name = "transferencia"),
+        @JsonSubTypes.Type(value = Efectivo.class, name = "efectivo"),
+        @JsonSubTypes.Type(value = Cheque.class, name = "cheque")
+})
 @Entity
 @Table(name = "medio_pago")
-@DiscriminatorColumn(name = "discriminador")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class MedioPago {
 
@@ -12,7 +21,6 @@ public class MedioPago {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String observacion;
-    private String discriminador;
 
     public MedioPago() {
     }
@@ -33,11 +41,4 @@ public class MedioPago {
         this.observacion = observacion;
     }
 
-    public String getDiscriminador() {
-        return discriminador;
-    }
-
-    public void setDiscriminador(String discriminador) {
-        this.discriminador = discriminador;
-    }
 }

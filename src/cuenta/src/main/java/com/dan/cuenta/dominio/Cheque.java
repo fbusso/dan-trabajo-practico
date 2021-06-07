@@ -5,7 +5,6 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "medio_pago_cheque")
-@DiscriminatorValue("CHEQUE")
 @PrimaryKeyJoinColumn(name = "medio_pago_id")
 public class Cheque extends MedioPago {
 
