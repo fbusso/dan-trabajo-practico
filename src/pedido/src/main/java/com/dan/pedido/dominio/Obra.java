@@ -11,6 +11,7 @@ public class Obra {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private Integer clienteId;
     private String descripcion;
 
     public Integer getId() {
