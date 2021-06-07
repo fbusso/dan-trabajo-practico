@@ -10,4 +10,6 @@ import java.util.List;
 public interface MaterialRepositorio extends JpaRepository<Material, Integer> {
 
     List<Material> findAllByIdIsInAndStockActual(List<Integer> ids, Integer stockActual);
+
+    List<Material> findAllByIdIsIn(List<Integer> ids);
 }
