@@ -56,5 +56,7 @@ public class MaterialServicioImpl implements MaterialServicio {
         if (!CollectionUtils.isEmpty(detalles)) {
             provisionServicio.crear(detalles);
         }
+
+        materialRepositorio.saveAll(materiales);
     }
 }
