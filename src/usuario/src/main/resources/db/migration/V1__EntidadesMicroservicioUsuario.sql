@@ -1,9 +1,9 @@
 CREATE TABLE usuario
 (
     id             SERIAL PRIMARY KEY,
-    nombre_usuario VARCHAR(20) UNIQUE NOT NULL,
+    nombre_usuario VARCHAR(30) UNIQUE NOT NULL,
     password       VARCHAR(50)        NOT NULL,
-    tipo_usuario   VARCHAR(20)        NOT NULL
+    tipo_usuario   VARCHAR(50)        NOT NULL
 );
 
 CREATE TABLE empleado
@@ -32,7 +32,7 @@ CREATE TABLE obra
     longitud    REAL         NOT NULL,
     superficie  INTEGER      NOT NULL,
     tipo_obra   VARCHAR(20)  NOT NULL,
-    cliente_id  INTEGER      NOT NULL,
+    cliente_id  INTEGER,
     CONSTRAINT fk_cliente FOREIGN KEY (cliente_id) REFERENCES cliente (id)
 );
 

@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -33,6 +34,16 @@ public class ClienteControlador {
     @GetMapping
     public ResponseEntity<List<Cliente>> obtenerTodos() {
         return ResponseEntity.ok(clienteServicio.obtenerTodos());
+    }
+
+    @GetMapping("/id/{id}")
+    public ResponseEntity<Cliente> obtenerPorId(@PathVariable Integer id) {
+        return ResponseEntity.of(clienteServicio.obtenerPorId(id));
+    }
+
+    @GetMapping("/obra/id/{id}")
+    public ResponseEntity<Cliente> obtenerPorObraId(@PathVariable Integer id) {
+        return ResponseEntity.of(clienteServicio.obtenerPorObraId(id));
     }
 
     @GetMapping("/cuit/{cuit}")

@@ -17,7 +17,7 @@ public class HttpServicioImpl implements HttpServicio {
 
     // TODO: Manejar flujo de errores
     @Override
-    public <T> T get(Class<T> tipo, String url, Object ...args) throws ReglaDeNegociosExcepcion {
+    public <T> T get(Class<T> tipo , String url, Object ...args) throws ReglaDeNegociosExcepcion {
 
         T dto;
         try {
@@ -28,9 +28,11 @@ public class HttpServicioImpl implements HttpServicio {
                     .bodyToMono(tipo)
                     .block();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ErrorDeConexionExcepcion();
         }
 
         return dto;
     }
+
 }

@@ -6,4 +6,6 @@ import com.dan.pedido.excepcion.ReglaDeNegociosExcepcion;
 public interface PedidoValidador {
 
     void validarCreacion(Pedido pedido) throws ReglaDeNegociosExcepcion;
+
+    Pedido validarConfirmacion(Integer id) throws ReglaDeNegociosExcepcion;
 }

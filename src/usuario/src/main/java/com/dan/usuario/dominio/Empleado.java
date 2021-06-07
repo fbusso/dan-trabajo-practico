@@ -3,7 +3,7 @@ package com.dan.usuario.dominio;
 import javax.persistence.*;
 
 @Entity
-public class Empleado {
+public class Empleado implements Registrable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,5 +39,15 @@ public class Empleado {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    @Override
+    public String nombreUsuario() {
+        return mail;
+    }
+
+    @Override
+    public TipoUsuario tipoUsuario() {
+        return TipoUsuario.VENDEDOR;
     }
 }

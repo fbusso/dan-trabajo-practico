@@ -1,11 +1,7 @@
 package com.dan.usuario.servicio.impl;
 
 import com.dan.usuario.dominio.Cliente;
-import com.dan.usuario.dominio.TipoUsuario;
 import com.dan.usuario.dominio.Usuario;
-import com.dan.usuario.excepcion.ClienteConObrasExcepcion;
-import com.dan.usuario.excepcion.ClienteNoEncontradoExcepcion;
-import com.dan.usuario.excepcion.ClienteSinObrasExcepcion;
 import com.dan.usuario.excepcion.ReglaDeNegociosExcepcion;
 import com.dan.usuario.repositorio.ClienteRepositorio;
 import com.dan.usuario.servicio.ClienteServicio;
@@ -32,8 +28,9 @@ public class ClienteServicioImpl implements ClienteServicio {
     @Override
     public Cliente crear(Cliente cliente) throws ReglaDeNegociosExcepcion {
         clienteValidador.validadrCreacion(cliente);
-        Usuario usuario = usuarioServicio.crearUsuario(cliente.getUsuario(), TipoUsuario.CLIENTE);
+        Usuario usuario = usuarioServicio.crearUsuario(cliente);
         cliente.setUsuario(usuario);
+        cliente.getObras().forEach(obra -> obra.setCliente(cliente));
         return clienteRepositorio.save(cliente);
     }
 
@@ -54,17 +51,22 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     @Override
     public Optional<Cliente> obtenerPorId(Integer id) {
-        return clienteRepositorio.findById(id);
+        return clienteRepositorio.findByIdAndFechaBajaIsNull(id);
+    }
+
+    @Override
+    public Optional<Cliente> obtenerPorObraId(Integer obraId) {
+        return clienteRepositorio.obtenerPorObraId(obraId);
     }
 
     @Override
     public Optional<Cliente> buscarPorCuit(String cuit) {
-        return clienteRepositorio.findFirstByCuitAndFechaBajaNotNull(cuit);
+        return clienteRepositorio.findFirstByCuitAndFechaBajaIsNull(cuit);
     }
 
     @Override
     public List<Cliente> buscarPorRazonSocial(String razonSocial) {
-        return clienteRepositorio.findAllByRazonSocialLikeAndFechaBajaNotNull(razonSocial);
+        return clienteRepositorio.findAllByRazonSocialLikeAndFechaBajaIsNull(razonSocial);
     }
 
     @Override

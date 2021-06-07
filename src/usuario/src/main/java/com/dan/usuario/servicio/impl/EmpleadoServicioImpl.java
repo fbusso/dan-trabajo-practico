@@ -24,7 +24,7 @@ public class EmpleadoServicioImpl implements EmpleadoServicio {
 
     @Override
     public Empleado crear(Empleado empleado) throws ReglaDeNegociosExcepcion {
-        Usuario usuario = usuarioServicio.crearUsuario(empleado.getUsuario(), TipoUsuario.CLIENTE);
+        Usuario usuario = usuarioServicio.crearUsuario(empleado);
         empleado.setUsuario(usuario);
         return empleadoRepositorio.save(empleado);
     }

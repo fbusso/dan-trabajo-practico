@@ -5,6 +5,7 @@ import com.dan.usuario.dto.SituacionCrediticiaDto;
 import com.dan.usuario.excepcion.*;
 import com.dan.usuario.servicio.BcraServicio;
 import com.dan.usuario.servicio.ClienteServicio;
+import com.dan.usuario.servicio.PedidoServicio;
 import com.dan.usuario.validador.ClienteValidador;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
@@ -17,18 +18,20 @@ public class ClienteValidadorImpl implements ClienteValidador {
 
     private final ClienteServicio clienteServicio;
     private final BcraServicio bcraServicio;
+    private final PedidoServicio pedidoServicio;
 
-    public ClienteValidadorImpl(@Lazy ClienteServicio clienteServicio, BcraServicio bcraServicio) {
+    public ClienteValidadorImpl(@Lazy ClienteServicio clienteServicio, BcraServicio bcraServicio, PedidoServicio pedidoServicio) {
         this.clienteServicio = clienteServicio;
         this.bcraServicio = bcraServicio;
+        this.pedidoServicio = pedidoServicio;
     }
 
     @Override
     public void validadrCreacion(Cliente cliente) throws ReglaDeNegociosExcepcion {
 
-        if (CollectionUtils.isEmpty(cliente.getObras())) {
+/*        if (CollectionUtils.isEmpty(cliente.getObras())) {
             throw new ClienteSinObrasExcepcion();
-        }
+        }*/
 
         SituacionCrediticiaDto situacionCrediticia = bcraServicio.obtenerSituacionCrediticiaPorCuit(cliente.getCuit());
 
@@ -49,7 +52,13 @@ public class ClienteValidadorImpl implements ClienteValidador {
             throw new ClienteNoEncontradoExcepcion();
         }
 
-        if (CollectionUtils.isEmpty(clienteOptional.get().getObras())) {
+        final Cliente cliente = clienteOptional.get();
+
+        if (!CollectionUtils.isEmpty(pedidoServicio.obtenerPorClienteId(cliente.getId()))) {
+            throw new ClienteConPedidosExcepcion();
+        }
+
+        if (!CollectionUtils.isEmpty(cliente.getObras())) {
             throw new ClienteConObrasExcepcion();
         }
     }

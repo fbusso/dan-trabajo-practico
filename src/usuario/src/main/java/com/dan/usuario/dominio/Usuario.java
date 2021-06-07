@@ -19,6 +19,12 @@ public class Usuario {
     public Usuario() {
     }
 
+    public Usuario(Registrable registrable) {
+        nombreUsuario = registrable.nombreUsuario();
+        tipoUsuario = registrable.tipoUsuario();
+        password = "1234";
+    }
+
     public Integer getId() {
         return id;
     }
