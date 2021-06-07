@@ -27,8 +27,6 @@ public interface ClienteServicio {
 
     List<Cliente> buscarPorRazonSocial(String razonSocial);
 
-    BigDecimal obtenerSaldoPorId(Integer id) throws ClienteNoEncontradoExcepcion;
-
     void eliminarPorId(Integer id) throws ReglaDeNegociosExcepcion;
 
 }

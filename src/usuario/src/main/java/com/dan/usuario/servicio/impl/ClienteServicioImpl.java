@@ -1,11 +1,7 @@
 package com.dan.usuario.servicio.impl;
 
 import com.dan.usuario.dominio.Cliente;
-import com.dan.usuario.dominio.TipoUsuario;
 import com.dan.usuario.dominio.Usuario;
-import com.dan.usuario.excepcion.ClienteConObrasExcepcion;
-import com.dan.usuario.excepcion.ClienteNoEncontradoExcepcion;
-import com.dan.usuario.excepcion.ClienteSinObrasExcepcion;
 import com.dan.usuario.excepcion.ReglaDeNegociosExcepcion;
 import com.dan.usuario.repositorio.ClienteRepositorio;
 import com.dan.usuario.servicio.ClienteServicio;
@@ -13,7 +9,6 @@ import com.dan.usuario.servicio.UsuarioServicio;
 import com.dan.usuario.validador.ClienteValidador;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,6 +30,7 @@ public class ClienteServicioImpl implements ClienteServicio {
         clienteValidador.validadrCreacion(cliente);
         Usuario usuario = usuarioServicio.crearUsuario(cliente);
         cliente.setUsuario(usuario);
+        cliente.getObras().forEach(obra -> obra.setCliente(cliente));
         return clienteRepositorio.save(cliente);
     }
 
@@ -55,7 +51,7 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     @Override
     public Optional<Cliente> obtenerPorId(Integer id) {
-        return clienteRepositorio.findById(id);
+        return clienteRepositorio.findByIdAndFechaBajaIsNull(id);
     }
 
     @Override
@@ -65,12 +61,12 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     @Override
     public Optional<Cliente> buscarPorCuit(String cuit) {
-        return clienteRepositorio.findFirstByCuitAndFechaBajaNotNull(cuit);
+        return clienteRepositorio.findFirstByCuitAndFechaBajaIsNull(cuit);
     }
 
     @Override
     public List<Cliente> buscarPorRazonSocial(String razonSocial) {
-        return clienteRepositorio.findAllByRazonSocialLikeAndFechaBajaNotNull(razonSocial);
+        return clienteRepositorio.findAllByRazonSocialLikeAndFechaBajaIsNull(razonSocial);
     }
 
     @Override
@@ -79,14 +75,4 @@ public class ClienteServicioImpl implements ClienteServicio {
         clienteRepositorio.deleteById(id);
     }
 
-    @Override
-    public BigDecimal obtenerSaldoPorId(Integer id) throws ClienteNoEncontradoExcepcion {
-        Optional<Cliente> clienteOptional = obtenerPorId(id);
-
-        if (clienteOptional.isEmpty()) {
-            throw new ClienteNoEncontradoExcepcion();
-        }
-
-        return clienteOptional.get().getMaximoCuentaCorriente();
-    }
 }

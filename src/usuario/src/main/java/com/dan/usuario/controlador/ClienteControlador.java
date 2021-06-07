@@ -61,11 +61,6 @@ public class ClienteControlador {
         return ResponseEntity.ok(clientes);
     }
 
-    @GetMapping("/id/{id}/saldo")
-    public ResponseEntity<BigDecimal> obtenerSaldoPorId(@PathVariable Integer id) throws ReglaDeNegociosExcepcion {
-        return ResponseEntity.ok(clienteServicio.obtenerSaldoPorId(id));
-    }
-
     @DeleteMapping("/id/{id}")
     public HttpStatus eliminarPorId(@PathVariable Integer id) throws ReglaDeNegociosExcepcion {
         clienteServicio.eliminarPorId(id);

@@ -32,7 +32,7 @@ CREATE TABLE obra
     longitud    REAL         NOT NULL,
     superficie  INTEGER      NOT NULL,
     tipo_obra   VARCHAR(20)  NOT NULL,
-    cliente_id  INTEGER      NOT NULL,
+    cliente_id  INTEGER,
     CONSTRAINT fk_cliente FOREIGN KEY (cliente_id) REFERENCES cliente (id)
 );
 
