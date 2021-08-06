@@ -17,3 +17,7 @@ GRANT ALL PRIVILEGES ON DATABASE "pedido-db" to pedido_application;
 CREATE DATABASE "cuenta-db";
 CREATE USER cuenta_application WITH PASSWORD 'AQG5VAEZCKBzEwFg';
 GRANT ALL PRIVILEGES ON DATABASE "cuenta-db" to cuenta_application;
+
+CREATE DATABASE "keycloak-db";
+CREATE USER keycloak_application WITH PASSWORD 'FNvJ1ThgdcvU390G';
+GRANT ALL PRIVILEGES ON DATABASE "keycloak-db" to keycloak_application;
