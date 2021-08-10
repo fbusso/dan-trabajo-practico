@@ -36,6 +36,7 @@ public class ConfiguracionKeycloak extends KeycloakWebSecurityConfigurerAdapter 
     {
         super.configure(http);
         http
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/api/**").hasRole("USUARIO")
                 .and()
