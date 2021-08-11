@@ -33,6 +33,11 @@ public class PedidoControlador {
         return ResponseEntity.of(pedidoServicio.obtenerPorId(id));
     }
 
+    @GetMapping()
+    public  ResponseEntity<List<Pedido>> obtenerTodos() {
+        return ResponseEntity.ok(pedidoServicio.obtenerTodos());
+    }
+
     @GetMapping("/cliente/{id}")
     public ResponseEntity<List<Pedido>> obtenerPorClienteId(@PathVariable Integer id) {
         return ResponseEntity.ok(pedidoServicio.obtenerPorClienteId(id));

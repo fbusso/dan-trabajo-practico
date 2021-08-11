@@ -12,6 +12,8 @@ public interface ObraServicio {
 
     Optional<Obra> obtenerPorId(Integer id);
 
+    List<Obra> obtenerTodos();
+
     List<Obra> obtenerPorClienteIdOTipoObra(Integer clienteId, TipoObra tipoObra);
 
     void eliminarPorId(Integer id);

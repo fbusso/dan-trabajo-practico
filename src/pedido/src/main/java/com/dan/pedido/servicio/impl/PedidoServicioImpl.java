@@ -81,6 +81,11 @@ public class PedidoServicioImpl implements PedidoServicio {
     }
 
     @Override
+    public List<Pedido> obtenerTodos() {
+        return pedidoRepositorio.findAll();
+    }
+
+    @Override
     public Optional<Pedido> agregarDetalle(Integer id, DetallePedido detalle) {
         Optional<Pedido> pedidoOptional = pedidoRepositorio.findById(id);
         pedidoOptional.ifPresent(pedido -> {

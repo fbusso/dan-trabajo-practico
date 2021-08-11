@@ -29,6 +29,11 @@ public class ObraControlador {
         return ResponseEntity.of(obraServicio.obtenerPorId(id));
     }
 
+    @GetMapping()
+    public ResponseEntity<List<Obra>> obtenerTodos() {
+        return ResponseEntity.ok(obraServicio.obtenerTodos());
+    }
+
     @GetMapping("/cliente-tipo")
     public ResponseEntity<List<Obra>> obtenerPorClienteOTipoObra(@RequestParam(required = false) Integer clienteId,
                                                                  @RequestParam(required = false) TipoObra tipoObra) {

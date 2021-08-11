@@ -68,7 +68,7 @@ public class Pedido {
     public BigDecimal getCostoTotal() {
         return getDetallePedido()
                 .stream()
-                .map(DetallePedido::getPrecio)
+                .map(detalle -> detalle.getPrecio().multiply(BigDecimal.valueOf(detalle.getCantidad())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 }

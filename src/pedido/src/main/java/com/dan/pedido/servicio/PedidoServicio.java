@@ -15,6 +15,8 @@ public interface PedidoServicio {
 
     Optional<Pedido> obtenerPorId(Integer id);
 
+    List<Pedido> obtenerTodos();
+
     Optional<Pedido> agregarDetalle(Integer id, DetallePedido detalle);
 
     void eliminarPorId(Integer id);

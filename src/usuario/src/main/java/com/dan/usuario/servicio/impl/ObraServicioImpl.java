@@ -35,6 +35,11 @@ public class ObraServicioImpl implements ObraServicio {
     }
 
     @Override
+    public List<Obra> obtenerTodos() {
+        return obraRepositorio.findAll();
+    }
+
+    @Override
     public List<Obra> obtenerPorClienteIdOTipoObra(Integer clienteId, TipoObra tipoObra) {
         return obraRepositorio.findAllByCliente_IdOrTipoObra(clienteId, tipoObra);
     }
