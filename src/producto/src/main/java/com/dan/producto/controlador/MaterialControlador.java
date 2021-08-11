@@ -3,14 +3,12 @@ package com.dan.producto.controlador;
 import com.dan.producto.dominio.Material;
 import com.dan.producto.servicio.MaterialServicio;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/material")
 public class MaterialControlador {
 

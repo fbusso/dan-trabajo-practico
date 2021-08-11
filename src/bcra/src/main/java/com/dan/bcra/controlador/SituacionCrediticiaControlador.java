@@ -3,10 +3,7 @@ package com.dan.bcra.controlador;
 import com.dan.bcra.dominio.SituacionCrediticia;
 import com.dan.bcra.servicio.SituacionCrediticiaServicioMock;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/sitaucion-crediticia")

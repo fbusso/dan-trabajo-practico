@@ -29,11 +29,13 @@ public class ClienteValidadorImpl implements ClienteValidador {
     @Override
     public void validadrCreacion(Cliente cliente) throws ReglaDeNegociosExcepcion {
 
-/*        if (CollectionUtils.isEmpty(cliente.getObras())) {
+        if (CollectionUtils.isEmpty(cliente.getObras())) {
             throw new ClienteSinObrasExcepcion();
-        }*/
+        }
 
-        SituacionCrediticiaDto situacionCrediticia = bcraServicio.obtenerSituacionCrediticiaPorCuit(cliente.getCuit());
+        //TODO Revisar comunicacion con microservicio
+        //final SituacionCrediticiaDto situacionCrediticia = bcraServicio.obtenerSituacionCrediticiaPorCuit(cliente.getCuit());
+        final SituacionCrediticiaDto situacionCrediticia = SituacionCrediticiaDto.NORMAL;
 
         if (situacionCrediticia == null) {
             throw new SituacionCrediticiaExcepcion();

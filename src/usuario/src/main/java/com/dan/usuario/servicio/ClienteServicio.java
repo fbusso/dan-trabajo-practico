@@ -1,11 +1,8 @@
 package com.dan.usuario.servicio;
 
 import com.dan.usuario.dominio.Cliente;
-import com.dan.usuario.excepcion.ClienteNoEncontradoExcepcion;
 import com.dan.usuario.excepcion.ReglaDeNegociosExcepcion;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 

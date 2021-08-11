@@ -12,6 +12,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/clientes")
 public class ClienteControlador {
 
