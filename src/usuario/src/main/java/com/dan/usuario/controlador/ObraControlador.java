@@ -3,11 +3,13 @@ package com.dan.usuario.controlador;
 import com.dan.usuario.dominio.Obra;
 import com.dan.usuario.dominio.TipoObra;
 import com.dan.usuario.servicio.ObraServicio;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -31,8 +33,11 @@ public class ObraControlador {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Obra>> obtenerTodos() {
-        return ResponseEntity.ok(obraServicio.obtenerTodos());
+    public ResponseEntity<Page<Obra>> obtenerTodos(@RequestParam(required = false) Integer page,
+                                                   @RequestParam(required = false) Integer size) {
+        final Integer pagina = Optional.ofNullable(page).orElse(0);
+        final Integer cantidadRegistros = Optional.ofNullable(size).orElse(Integer.MAX_VALUE);
+        return ResponseEntity.ok(obraServicio.obtenerTodos(pagina, cantidadRegistros));
     }
 
     @GetMapping("/cliente-tipo")

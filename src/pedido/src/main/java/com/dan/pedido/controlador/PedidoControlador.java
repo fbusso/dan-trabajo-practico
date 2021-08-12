@@ -5,11 +5,13 @@ import com.dan.pedido.dominio.Pedido;
 import com.dan.pedido.excepcion.ReglaDeNegociosExcepcion;
 import com.dan.pedido.servicio.DetallePedidoServicio;
 import com.dan.pedido.servicio.PedidoServicio;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -35,8 +37,11 @@ public class PedidoControlador {
     }
 
     @GetMapping()
-    public  ResponseEntity<List<Pedido>> obtenerTodos() {
-        return ResponseEntity.ok(pedidoServicio.obtenerTodos());
+    public  ResponseEntity<Page<Pedido>> obtenerTodos(@RequestParam(required = false) Integer page,
+                                                      @RequestParam(required = false) Integer size) {
+        final Integer pagina = Optional.ofNullable(page).orElse(0);
+        final Integer cantidadRegistros = Optional.ofNullable(size).orElse(Integer.MAX_VALUE);
+        return ResponseEntity.ok(pedidoServicio.obtenerTodos(pagina, cantidadRegistros));
     }
 
     @GetMapping("/cliente/{id}")

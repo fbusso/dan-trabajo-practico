@@ -10,6 +10,8 @@ import com.dan.pedido.excepcion.SituacionCrediticiaExcepcion;
 import com.dan.pedido.repositorio.PedidoRepositorio;
 import com.dan.pedido.servicio.*;
 import com.dan.pedido.validador.PedidoValidador;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -81,8 +83,9 @@ public class PedidoServicioImpl implements PedidoServicio {
     }
 
     @Override
-    public List<Pedido> obtenerTodos() {
-        return pedidoRepositorio.findAll();
+    public Page<Pedido> obtenerTodos(Integer pagina, Integer cantidadRegistros) {
+        final PageRequest pageRequest = PageRequest.of(pagina, cantidadRegistros);
+        return pedidoRepositorio.findAll(pageRequest);
     }
 
     @Override

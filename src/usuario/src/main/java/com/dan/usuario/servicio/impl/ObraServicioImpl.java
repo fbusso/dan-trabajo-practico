@@ -6,6 +6,8 @@ import com.dan.usuario.dominio.TipoObra;
 import com.dan.usuario.repositorio.ObraRepositorio;
 import com.dan.usuario.servicio.ClienteServicio;
 import com.dan.usuario.servicio.ObraServicio;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,8 +37,9 @@ public class ObraServicioImpl implements ObraServicio {
     }
 
     @Override
-    public List<Obra> obtenerTodos() {
-        return obraRepositorio.findAll();
+    public Page<Obra> obtenerTodos(Integer pagina, Integer cantidadRegistros) {
+        final PageRequest pageRequest = PageRequest.of(pagina, cantidadRegistros);
+        return obraRepositorio.findAll(pageRequest);
     }
 
     @Override
