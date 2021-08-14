@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "bcra.obtener-situacion-crediticia-url",
+      "type": "java.lang.String",
+      "description": "URL al Microservicio del BCRA para obtener la situación Crediticia de un Cliente por su CUIL."
+    },
+    {
+      "name": "pedidos.obtener-pedidos-por-cliente-id",
+      "type": "java.lang.String",
+      "description": "URL al Microservicio de Pedidos para obtener los Pedidos asociados a un Cliente por su ID."
+    }
+  ]
+}
