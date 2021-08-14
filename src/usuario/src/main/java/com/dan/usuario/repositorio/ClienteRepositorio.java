@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface ClienteRepositorio extends JpaRepository<Cliente, Integer> {
 
-    List<Cliente> findAllByFechaBajaNotNull();
+    List<Cliente> findAllByFechaBajaIsNull();
 
     List<Cliente> findAllByRazonSocialLikeAndFechaBajaIsNull(String razonSocial);
 

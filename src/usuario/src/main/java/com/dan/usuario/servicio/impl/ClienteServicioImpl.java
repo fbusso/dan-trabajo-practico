@@ -28,7 +28,7 @@ public class ClienteServicioImpl implements ClienteServicio {
     @Override
     public Cliente crear(Cliente cliente) throws ReglaDeNegociosExcepcion {
         clienteValidador.validadrCreacion(cliente);
-        Usuario usuario = usuarioServicio.crearUsuario(cliente);
+        final Usuario usuario = usuarioServicio.crearUsuario(cliente);
         cliente.setUsuario(usuario);
         cliente.getObras().forEach(obra -> obra.setCliente(cliente));
         return clienteRepositorio.save(cliente);
@@ -46,7 +46,7 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     @Override
     public List<Cliente> obtenerTodos() {
-        return clienteRepositorio.findAllByFechaBajaNotNull();
+        return clienteRepositorio.findAllByFechaBajaIsNull();
     }
 
     @Override
