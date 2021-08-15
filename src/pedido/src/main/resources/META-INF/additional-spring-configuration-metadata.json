@@ -14,5 +14,10 @@
       "name": "rabbitmq.routing-key",
       "type": "java.lang.String",
       "description": "Clave a agregar en el encabezado del mensaje."
+    },
+    {
+      "name": "materiales.obtener-sin-stock",
+      "type": "java.lang.String",
+      "description": "URL al Microservicio de Materiales para obtener los Materiales sin Stock."
     }
   ] }
