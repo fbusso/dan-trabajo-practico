@@ -6,21 +6,17 @@ import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.amqp.support.converter.MessageConverter;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ConfiguracionRabbitMq {
 
-    @Value("${rabbitmq.direct-exchange-name}")
-    public static String DIRECT_EXCHANGE_NAME;
+    public static final String DIRECT_EXCHANGE_NAME = "COLA_PEDIDOS-EXCHANGE";
 
-    @Value("${rabbitmq.queue-name}")
-    public static String NOMBRE_COLA;
+    public static final String NOMBRE_COLA = "COLA_PEDIDOS";
 
-    @Value("${rabbitmq.routing-key}")
-    public static String ROUTING_KEY;
+    public static final String ROUTING_KEY = "COLA_PEDIDOS-ROUTING-KEY";
 
     @Bean
     Queue queue() {
