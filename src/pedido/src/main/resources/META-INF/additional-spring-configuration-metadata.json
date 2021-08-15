@@ -20,4 +20,5 @@
       "type": "java.lang.String",
       "description": "URL al Microservicio de Materiales para obtener los Materiales sin Stock."
     }
-  ] }
+  ]
+}
