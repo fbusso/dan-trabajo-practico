@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-    db-ms-usuario:
+    database:
         container_name: postgres
         image: postgres
         restart: always
@@ -39,6 +39,62 @@ services:
             # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
             #JDBC_PARAMS: "ssl=true"
         ports:
-            - 8080:8080
+            - "8080:8080"
         depends_on:
-            - db-ms-usuario
+            - database
+
+    # Microservicio BCRA
+    ms-bcra:
+        container_name: ms-bcra
+        build:
+            context: ./src/bcra
+            dockerfile: Dockerfile
+        ports:
+            - "9010:9010"
+        depends_on:
+          - database
+
+  # Microservicio de Cuenta Corriente
+    ms-cuenta:
+      container_name: ms-cuenta
+      build:
+        context: ./src/cuenta
+        dockerfile: Dockerfile
+      ports:
+        - "9003:9003"
+      depends_on:
+        - database
+
+  # Microservicio de Pedidos
+    ms-pedido:
+      container_name: ms-pedido
+      build:
+        context: ./src/pedido
+        dockerfile: Dockerfile
+      ports:
+        - "9002:9002"
+      depends_on:
+        - database
+        - rabbit-mq
+
+  # Microservicio de Productos
+    ms-producto:
+      container_name: ms-producto
+      build:
+        context: ./src/producto
+        dockerfile: Dockerfile
+      ports:
+        - "9001:9001"
+      depends_on:
+        - database
+
+  # Microservicio de Usuarios
+    ms-usuario:
+      container_name: ms-usuario
+      build:
+        context: ./src/usuario
+        dockerfile: Dockerfile
+      ports:
+        - "9000:9000"
+      depends_on:
+        - database
