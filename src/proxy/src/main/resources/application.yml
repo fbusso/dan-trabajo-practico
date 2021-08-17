@@ -1,0 +1,37 @@
+server:
+  port: 8081
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: bcra
+          uri: http://localhost:9010/
+          predicates:
+            - Path=/bcra/**
+          filters:
+            - RewritePath=/bcra, /api
+        - id: pedido
+          uri: http://localhost:9002/
+          predicates:
+            - Path=/pedido/**
+          filters:
+            - RewritePath=/pedido, /api
+        - id: producto
+          uri: http://localhost:9001/
+          predicates:
+            - Path=/producto/**
+          filters:
+            - RewritePath=/producto, /api
+        - id: cuenta
+          uri: http://localhost:9003/
+          predicates:
+            - Path=/cuenta/**
+          filters:
+            - RewritePath=/cuenta, /api
+        - id: usuario
+          uri: http://localhost:9000/
+          predicates:
+            - Path=/usuario/**
+          filters:
+            - RewritePath=/usuario, /api
