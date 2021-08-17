@@ -41,6 +41,7 @@ services:
         ports:
             - "8080:8080"
         depends_on:
+            - db-ms-usuario
             - database
 
     # Microservicio BCRA
@@ -108,3 +109,18 @@ services:
         - "9000:9000"
       depends_on:
         - database
+
+    # Etapa 2
+    prometheus:
+        container_name: prometheus
+        image: prom/prometheus
+        volumes:
+          - ./resources/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+        ports:
+          - "9090:9090"
+
+    grafana:
+        container_name: grafana
+        image: grafana/grafana
+        ports:
+          - "3000:3000"
