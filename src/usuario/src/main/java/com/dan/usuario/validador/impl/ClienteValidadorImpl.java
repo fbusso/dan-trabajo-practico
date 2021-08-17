@@ -33,15 +33,13 @@ public class ClienteValidadorImpl implements ClienteValidador {
             throw new ClienteSinObrasExcepcion();
         }
 
-        //TODO Revisar comunicacion con microservicio
-        //final SituacionCrediticiaDto situacionCrediticia = bcraServicio.obtenerSituacionCrediticiaPorCuit(cliente.getCuit());
-        final SituacionCrediticiaDto situacionCrediticia = SituacionCrediticiaDto.NORMAL;
+        final SituacionCrediticiaDto situacionCrediticia = bcraServicio.obtenerSituacionCrediticiaPorCuit(cliente.getCuit());
 
         if (situacionCrediticia == null) {
             throw new SituacionCrediticiaExcepcion();
         }
 
-        if (!SituacionCrediticiaDto.NORMAL.equals(situacionCrediticia) && !SituacionCrediticiaDto.BAJO.equals(situacionCrediticia)) {
+        if (!SituacionCrediticiaDto.esSituacionValida(situacionCrediticia)) {
             throw new SituacionCrediticiaExcepcion(situacionCrediticia);
         }
     }

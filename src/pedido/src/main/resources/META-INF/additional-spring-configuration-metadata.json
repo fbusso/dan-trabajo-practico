@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "materiales.obtener-sin-stock",
+      "type": "java.lang.String",
+      "description": "URL al Microservicio de Materiales para obtener los Materiales sin Stock."
+    },
+    {
+      "name": "bcra.obtener-situacion-crediticia-url",
+      "type": "java.lang.String",
+      "description": "URL al Microservicio del BCRA para obtener la situación Crediticia de un Cliente por su CUIL."
+    }
+  ]
+}

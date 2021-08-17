@@ -13,7 +13,9 @@ import org.springframework.stereotype.Component;
 public class ConfiguracionRabbitMq {
 
     public static final String DIRECT_EXCHANGE_NAME = "COLA_PEDIDOS-EXCHANGE";
+
     public static final String NOMBRE_COLA = "COLA_PEDIDOS";
+
     public static final String ROUTING_KEY = "COLA_PEDIDOS-ROUTING-KEY";
 
     @Bean

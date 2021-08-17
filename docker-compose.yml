@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-    db-ms-usuario:
+    database:
         container_name: postgres
         image: postgres
         restart: always
@@ -29,7 +29,7 @@ services:
             - "-b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json"
         environment:
             DB_VENDOR: POSTGRES
-            DB_ADDR: db-ms-usuario
+            DB_ADDR: database
             DB_DATABASE: keycloak-db
             DB_USER: keycloak_application
             DB_SCHEMA: public
@@ -39,10 +39,78 @@ services:
             # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
             #JDBC_PARAMS: "ssl=true"
         ports:
-            - 8080:8080
+            - "8080:8080"
         depends_on:
             - db-ms-usuario
-    
+            - database
+
+    # Microservicio BCRA
+    ms-bcra:
+        container_name: ms-bcra
+        build:
+            context: ./src/bcra
+            dockerfile: Dockerfile
+        ports:
+            - "9010:9010"
+        depends_on:
+          - database
+
+  # Microservicio de Cuenta Corriente
+    ms-cuenta:
+      container_name: ms-cuenta
+      build:
+        context: ./src/cuenta
+        dockerfile: Dockerfile
+      env_file:
+        - config.env
+      volumes:
+        - ./src/cuenta/src/main/resources/db/migration
+      ports:
+        - "9003:9003"
+      depends_on:
+        - database
+
+  # Microservicio de Pedidos
+    ms-pedido:
+      container_name: ms-pedido
+      build:
+        context: ./src/pedido
+        dockerfile: Dockerfile
+      volumes:
+        - ./src/pedido/src/main/resources/db/migration
+      ports:
+        - "9002:9002"
+      depends_on:
+        - database
+        - rabbit-mq
+
+  # Microservicio de Productos
+    ms-producto:
+      container_name: ms-producto
+      build:
+        context: ./src/producto
+        dockerfile: Dockerfile
+      volumes:
+        - ./src/producto/src/main/resources/db/migration
+      ports:
+        - "9001:9001"
+      depends_on:
+        - database
+
+  # Microservicio de Usuarios
+    ms-usuario:
+      container_name: ms-usuario
+      build:
+        context: ./src/usuario
+        dockerfile: Dockerfile
+      volumes:
+        - ./src/usuario/src/main/resources/db/migration
+      ports:
+        - "9000:9000"
+      depends_on:
+        - database
+
+    # Etapa 2
     prometheus:
         container_name: prometheus
         image: prom/prometheus
