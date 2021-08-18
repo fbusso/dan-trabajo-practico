@@ -1,118 +1,168 @@
 version: '3.8'
 services:
-    database:
-        container_name: postgres
-        image: postgres
-        restart: always
-        volumes:
-        -   ./resources/build-database.sql:/docker-entrypoint-initdb.d/init.sql
-        environment:
-            POSTGRES_USER: database_user
-            POSTGRES_PASSWORD: TWSsy9Le647u9wnU
-            POSTGRES_DATABSAE: postgres
-        ports:
-            - '5432:5432'
+  database:
+    container_name: postgres
+    image: postgres
+    restart: always
+    volumes:
+      - ./resources/database/build-database.sql:/docker-entrypoint-initdb.d/init.sql
+    env_file:
+      - ./resources/database/config.env
+    ports:
+      - '5432:5432'
 
-    rabbit-mq:
-        container_name: rabbit-mq
-        image: rabbitmq:management
-        ports:
-            - "5672:5672"
-            - "15672:15672"
+  rabbit-mq:
+    container_name: rabbit-mq
+    image: rabbitmq:management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
 
-    keycloak:
-        container_name: keycloak
-        image: quay.io/keycloak/keycloak:latest
-        volumes:
-            - ./resources/keycloak:/opt/jboss/keycloak/imports
-        command:
-            - "-b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json"
-        environment:
-            DB_VENDOR: POSTGRES
-            DB_ADDR: database
-            DB_DATABASE: keycloak-db
-            DB_USER: keycloak_application
-            DB_SCHEMA: public
-            DB_PASSWORD: FNvJ1ThgdcvU390G
-            KEYCLOAK_USER: admin
-            KEYCLOAK_PASSWORD: keycloakpass
-            # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
-            #JDBC_PARAMS: "ssl=true"
-        ports:
-            - "8080:8080"
-        depends_on:
-            - database
+  keycloak:
+    container_name: keycloak
+    image: quay.io/keycloak/keycloak:latest
+    volumes:
+      - ./resources/keycloak:/opt/jboss/keycloak/imports
+    command:
+      - "-b 0.0.0.0 -Dkeycloak.import=/opt/jboss/keycloak/imports/realm-export.json"
+    env_file:
+      - ./resources/keycloak/config.env
+    ports:
+      - "8080:8080"
+    depends_on:
+      - database
 
-    # Microservicio BCRA
-    ms-bcra:
-        container_name: ms-bcra
-        build:
-            context: ./src/bcra
-            dockerfile: Dockerfile
-        ports:
-            - "9010:9010"
-        depends_on:
-          - database
+  # Microservicio BCRA
+  ms-bcra:
+    container_name: ms-bcra
+    build:
+      context: ./src/bcra
+      dockerfile: Dockerfile
+    ports:
+      - "9010:9010"
 
   # Microservicio de Cuenta Corriente
-    ms-cuenta:
-      container_name: ms-cuenta
-      build:
-        context: ./src/cuenta
-        dockerfile: Dockerfile
-      env_file:
-        - config.env
-      volumes:
-        - ./src/cuenta/src/main/resources/db/migration
-      ports:
-        - "9003:9003"
-      depends_on:
-        - database
+  ms-cuenta:
+    container_name: ms-cuenta
+    build:
+      context: ./src/cuenta
+      dockerfile: Dockerfile
+    env_file:
+      - config.env
+    volumes:
+      - ./src/cuenta/src/main/resources/db/migration
+    ports:
+      - "9003:9003"
+    depends_on:
+      - database
+      - flyway-ms-cuenta
 
   # Microservicio de Pedidos
-    ms-pedido:
-      container_name: ms-pedido
-      build:
-        context: ./src/pedido
-        dockerfile: Dockerfile
-      volumes:
-        - ./src/pedido/src/main/resources/db/migration
-      ports:
-        - "9002:9002"
-      depends_on:
-        - database
-        - rabbit-mq
+  ms-pedido:
+    container_name: ms-pedido
+    build:
+      context: ./src/pedido
+      dockerfile: Dockerfile
+    volumes:
+      - ./src/pedido/src/main/resources/db/migration
+    ports:
+      - "9002:9002"
+    depends_on:
+      - database
+      - rabbit-mq
+      - flyway-ms-pedido
 
   # Microservicio de Productos
-    ms-producto:
-      container_name: ms-producto
-      build:
-        context: ./src/producto
-        dockerfile: Dockerfile
-      volumes:
-        - ./src/producto/src/main/resources/db/migration
-      ports:
-        - "9001:9001"
-      depends_on:
-        - database
+  ms-producto:
+    container_name: ms-producto
+    build:
+      context: ./src/producto
+      dockerfile: Dockerfile
+    volumes:
+      - ./src/producto/src/main/resources/db/migration
+    ports:
+      - "9001:9001"
+    depends_on:
+      - database
+      - flyway-ms-producto
 
   # Microservicio de Usuarios
-    ms-usuario:
-      container_name: ms-usuario
-      build:
-        context: ./src/usuario
-        dockerfile: Dockerfile
-      volumes:
-        - ./src/usuario/src/main/resources/db/migration
-      ports:
-        - "9000:9000"
-      depends_on:
-        - database
+  ms-usuario:
+    container_name: ms-usuario
+    build:
+      context: ./src/usuario
+      dockerfile: Dockerfile
+    volumes:
+      - ./src/usuario/src/main/resources/db/migration
+    ports:
+      - "9000:9000"
+    depends_on:
+      - database
+      - flyway-ms-usuario
 
-    consul:
-        container_name: consul
-        image: consul
-        ports:
-            - "8500:8500"
-        depends_on:
-            - database
+  # Prometheus
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus
+    volumes:
+      - ./resources/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+
+  # Grafana
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+
+  ## Servicios utilizados para las migraciones de Flyway ##
+
+  # Migración de Microservicio de Cuenta #
+  flyway-ms-cuenta:
+    image: flyway/flyway
+    command: migrate
+    volumes:
+      - ./src/cuenta/src/main/resources/db/migration:/flyway/sql # Volumen de los archivos de migración
+      - ./src/cuenta/src/main/resources/db/config:/flyway/conf   # Volumen del archivo de configuración
+    depends_on:
+      - database
+
+  # Migración de Microservicio de Pedidos #
+  flyway-ms-pedido:
+    image: flyway/flyway
+    command: migrate
+    volumes:
+      - ./src/pedido/src/main/resources/db/migration:/flyway/sql # Volumen de los archivos de migración
+      - ./src/pedido/src/main/resources/db/config:/flyway/conf   # Volumen del archivo de configuración
+    depends_on:
+      - database
+
+  # Migración de Microservicio de Producto #
+  flyway-ms-producto:
+    image: flyway/flyway
+    command: migrate
+    volumes:
+      - ./src/producto/src/main/resources/db/migration:/flyway/sql # Volumen de los archivos de migración
+      - ./src/producto/src/main/resources/db/config:/flyway/conf   # Volumen del archivo de configuración
+    depends_on:
+      - database
+
+  # Migración de Microservicio de Usuarios #
+  flyway-ms-usuario:
+    image: flyway/flyway
+    command: migrate
+    volumes:
+      - ./src/usuario/src/main/resources/db/migration:/flyway/sql # Volumen de los archivos de migración
+      - ./src/usuario/src/main/resources/db/config:/flyway/conf   # Volumen del archivo de configuración
+    depends_on:
+      - database
+
+  # Consul
+  consul:
+    container_name: consul
+    image: consul
+    ports:
+      - "8500:8500"
+    depends_on:
+      - database

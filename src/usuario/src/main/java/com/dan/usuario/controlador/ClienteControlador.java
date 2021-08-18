@@ -1,6 +1,7 @@
 package com.dan.usuario.controlador;
 
 import com.dan.usuario.dominio.Cliente;
+import com.dan.usuario.dto.AltaClienteDto;
 import com.dan.usuario.excepcion.ReglaDeNegociosExcepcion;
 import com.dan.usuario.servicio.ClienteServicio;
 import org.apache.commons.lang3.StringUtils;
@@ -8,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -22,8 +22,8 @@ public class ClienteControlador {
     }
 
     @PostMapping
-    public ResponseEntity<Cliente> crear(@RequestBody Cliente cliente) throws ReglaDeNegociosExcepcion {
-        return new ResponseEntity<>(clienteServicio.crear(cliente), HttpStatus.CREATED);
+    public ResponseEntity<Cliente> crear(@RequestBody AltaClienteDto altaCliente) throws ReglaDeNegociosExcepcion {
+        return new ResponseEntity<>(clienteServicio.crear(altaCliente), HttpStatus.CREATED);
     }
 
     @PutMapping

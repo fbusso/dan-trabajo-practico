@@ -1,6 +1,7 @@
 package com.dan.usuario.servicio;
 
 import com.dan.usuario.dominio.Cliente;
+import com.dan.usuario.dto.AltaClienteDto;
 import com.dan.usuario.excepcion.ReglaDeNegociosExcepcion;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.Optional;
 
 public interface ClienteServicio {
 
-    Cliente crear(Cliente cliente) throws ReglaDeNegociosExcepcion;
+    Cliente crear(AltaClienteDto altaClienteDto) throws ReglaDeNegociosExcepcion;
 
     Cliente actualizar(Cliente cliente);
 

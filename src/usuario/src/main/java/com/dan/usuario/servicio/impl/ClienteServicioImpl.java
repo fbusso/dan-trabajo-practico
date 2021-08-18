@@ -2,6 +2,7 @@ package com.dan.usuario.servicio.impl;
 
 import com.dan.usuario.dominio.Cliente;
 import com.dan.usuario.dominio.Usuario;
+import com.dan.usuario.dto.AltaClienteDto;
 import com.dan.usuario.excepcion.ReglaDeNegociosExcepcion;
 import com.dan.usuario.repositorio.ClienteRepositorio;
 import com.dan.usuario.servicio.ClienteServicio;
@@ -26,7 +27,9 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     @Override
-    public Cliente crear(Cliente cliente) throws ReglaDeNegociosExcepcion {
+    public Cliente crear(AltaClienteDto altaCliente) throws ReglaDeNegociosExcepcion {
+        final Cliente cliente = altaCliente.getCliente();
+        cliente.setObras(altaCliente.getObras());
         clienteValidador.validadrCreacion(cliente);
         final Usuario usuario = usuarioServicio.crearUsuario(cliente);
         cliente.setUsuario(usuario);
