@@ -55,6 +55,7 @@ services:
       - "9003:9003"
     depends_on:
       - database
+      - flyway-ms-cuenta
 
   # Microservicio de Pedidos
   ms-pedido:
@@ -69,6 +70,7 @@ services:
     depends_on:
       - database
       - rabbit-mq
+      - flyway-ms-pedido
 
   # Microservicio de Productos
   ms-producto:
@@ -82,6 +84,7 @@ services:
       - "9001:9001"
     depends_on:
       - database
+      - flyway-ms-producto
 
   # Microservicio de Usuarios
   ms-usuario:
@@ -95,6 +98,7 @@ services:
       - "9000:9000"
     depends_on:
       - database
+      - flyway-ms-usuario
 
   # Prometheus
   prometheus:
