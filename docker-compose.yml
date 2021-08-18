@@ -122,6 +122,6 @@ services:
     command: migrate
     volumes:
       - ./src/cuenta/src/main/resources/db/migration:/flyway/sql # Volumen de los archivos de migración
-      - ./resources/flyway:/flyway/conf                          # Volumen del archivo de configuración
+      - ./src/cuenta/src/main/resources/db/config:/flyway/conf   # Volumen del archivo de configuración
     depends_on:
       - database
