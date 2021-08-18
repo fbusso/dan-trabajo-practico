@@ -8,7 +8,8 @@ CREATE TABLE obra
 CREATE TABLE producto
 (
     id          SERIAL PRIMARY KEY,
-    descripcion VARCHAR(100)   NOT NULL
+    descripcion VARCHAR(100)   NOT NULL,
+    precio      NUMERIC(19, 2) NOT NULL
 );
 
 CREATE TABLE pedido

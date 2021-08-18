@@ -1,0 +1,1 @@
+ALTER TABLE Producto DROP COLUMN precio;
