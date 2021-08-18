@@ -63,6 +63,8 @@ services:
     build:
       context: ./src/pedido
       dockerfile: Dockerfile
+    env_file:
+      - config.env
     volumes:
       - ./src/pedido/src/main/resources/db/migration
     ports:
@@ -78,6 +80,8 @@ services:
     build:
       context: ./src/producto
       dockerfile: Dockerfile
+    env_file:
+      - config.env
     volumes:
       - ./src/producto/src/main/resources/db/migration
     ports:
@@ -92,6 +96,8 @@ services:
     build:
       context: ./src/usuario
       dockerfile: Dockerfile
+    env_file:
+      - config.env
     volumes:
       - ./src/usuario/src/main/resources/db/migration
     ports:
