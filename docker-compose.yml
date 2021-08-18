@@ -40,8 +40,6 @@ services:
       dockerfile: Dockerfile
     ports:
       - "9010:9010"
-    depends_on:
-      - database
 
   # Microservicio de Cuenta Corriente
   ms-cuenta:
@@ -123,5 +121,35 @@ services:
     volumes:
       - ./src/cuenta/src/main/resources/db/migration:/flyway/sql # Volumen de los archivos de migración
       - ./src/cuenta/src/main/resources/db/config:/flyway/conf   # Volumen del archivo de configuración
+    depends_on:
+      - database
+
+  # Migración de Microservicio de Pedidos #
+  flyway-ms-pedido:
+    image: flyway/flyway
+    command: migrate
+    volumes:
+      - ./src/pedido/src/main/resources/db/migration:/flyway/sql # Volumen de los archivos de migración
+      - ./src/pedido/src/main/resources/db/config:/flyway/conf   # Volumen del archivo de configuración
+    depends_on:
+      - database
+
+  # Migración de Microservicio de Producto #
+  flyway-ms-producto:
+    image: flyway/flyway
+    command: migrate
+    volumes:
+      - ./src/producto/src/main/resources/db/migration:/flyway/sql # Volumen de los archivos de migración
+      - ./src/producto/src/main/resources/db/config:/flyway/conf   # Volumen del archivo de configuración
+    depends_on:
+      - database
+
+  # Migración de Microservicio de Usuarios #
+  flyway-ms-usuario:
+    image: flyway/flyway
+    command: migrate
+    volumes:
+      - ./src/usuario/src/main/resources/db/migration:/flyway/sql # Volumen de los archivos de migración
+      - ./src/usuario/src/main/resources/db/config:/flyway/conf   # Volumen del archivo de configuración
     depends_on:
       - database
