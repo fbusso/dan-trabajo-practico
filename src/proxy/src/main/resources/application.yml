@@ -4,11 +4,22 @@ server:
 spring:
   cloud:
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedHeaders: "*"
+            allowCredentials: true
+            allowedOrigins: "http://localhost:3001"
+            allowedMethods:
+              - POST
+              - GET
+              - OPTIONS
       routes:
         - id: bcra
           uri: http://localhost:9010/
           predicates:
             - Path=/bcra/**
+          allowed-origins:
           filters:
             - RewritePath=/bcra, /api
         - id: pedido
