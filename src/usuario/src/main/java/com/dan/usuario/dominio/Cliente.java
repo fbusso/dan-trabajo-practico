@@ -28,6 +28,7 @@ public class Cliente implements Registrable {
             inverseJoinColumns = {@JoinColumn(name = "usuario_id")})
     private Usuario usuario;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "cliente", orphanRemoval = true, cascade = CascadeType.ALL)
     private List<Obra> obras;
 
