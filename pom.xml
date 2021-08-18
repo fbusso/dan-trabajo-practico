@@ -15,6 +15,7 @@
         <module>src/bcra</module>
         <module>src/cuenta</module>
         <module>src/proxy</module>
+        <module>src/servicediscovery</module>
 <!-- <module>src/cliente</module> -->
     </modules>
 

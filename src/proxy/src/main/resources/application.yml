@@ -2,6 +2,8 @@ server:
   port: 8081
 
 spring:
+  application:
+    name: PROXY
   cloud:
     gateway:
       globalcors:
@@ -15,34 +17,39 @@ spring:
               - GET
               - OPTIONS
       routes:
-        - id: bcra
+        - id: BCRA
           uri: http://localhost:9010/
           predicates:
             - Path=/bcra/**
           allowed-origins:
           filters:
             - RewritePath=/bcra, /api
-        - id: pedido
-          uri: http://localhost:9002/
+        - id: PEDIDO
+          uri: lb://PEDIDO
           predicates:
             - Path=/pedido/**
           filters:
             - RewritePath=/pedido, /api
-        - id: producto
-          uri: http://localhost:9001/
+        - id: PRODUCTO
+          uri: lb://PRODUCTO
           predicates:
             - Path=/producto/**
           filters:
             - RewritePath=/producto, /api
-        - id: cuenta
-          uri: http://localhost:9003/
+        - id: CUENTA
+          uri: lb://CUENTA
           predicates:
             - Path=/cuenta/**
           filters:
             - RewritePath=/cuenta, /api
-        - id: usuario
-          uri: http://localhost:9000/
+        - id: USUARIO
+          uri: lb://USUARIO
           predicates:
             - Path=/usuario/**
           filters:
             - RewritePath=/usuario, /api
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8082/eureka
