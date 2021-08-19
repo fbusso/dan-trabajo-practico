@@ -3,7 +3,7 @@ docker-compose up -d database
 
 # Build de imagen de Microservicio de BCRA
 cd src/bcra
-mvn spring-boot:build-image -DskipTests=true -Pdeploy
+mvn spring-boot:build-image -DskipTests=true
 cd ../../
 
 # Build de imagen de Microservicio de Cuenta Corriente
@@ -24,6 +24,16 @@ cd ../../
 # Build de imagen de Microservicio de Usuario
 cd src/usuario
 mvn spring-boot:build-image -DskipTests=true -Pdeploy
+cd ../../
+
+# Build de imagen de Microservicio de Proxy
+cd src/proxy
+mvn spring-boot:build-image -DskipTests=true
+cd ../../
+
+# Build de imagen de Microservicio de Service Discovery
+cd src/servicediscovery
+mvn spring-boot:build-image -DskipTests=true
 cd ../../
 
 # Baja del servicio de base de datos
