@@ -20,7 +20,7 @@ public class ConfiguracionRabbitMq {
 
     @Bean
     Queue queue() {
-        return new Queue(NOMBRE_COLA);
+        return new Queue(NOMBRE_COLA, true);
     }
 
     @Bean
