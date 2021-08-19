@@ -31,7 +31,12 @@ public class PedidoServicioImpl implements PedidoServicio {
     private final BcraServicio bcraServicio;
     private final ColaMensajesServicio colaMensajesServicio;
 
-    public PedidoServicioImpl(PedidoRepositorio pedidoRepositorio, PedidoValidador pedidoValidador, MaterialServicio materialServicio, UsuarioServicio usuarioServicio, BcraServicio bcraServicio, ColaMensajesServicio colaMensajesServicio) {
+    public PedidoServicioImpl(PedidoRepositorio pedidoRepositorio,
+                              PedidoValidador pedidoValidador,
+                              MaterialServicio materialServicio,
+                              UsuarioServicio usuarioServicio,
+                              BcraServicio bcraServicio,
+                              ColaMensajesServicio colaMensajesServicio) {
         this.pedidoRepositorio = pedidoRepositorio;
         this.pedidoValidador = pedidoValidador;
         this.materialServicio = materialServicio;
@@ -101,7 +106,7 @@ public class PedidoServicioImpl implements PedidoServicio {
 
     @Override
     public List<Pedido> obtenerPorClienteId(Integer clienteId) {
-        return null;
+        return pedidoRepositorio.findAllByObra_clienteId(clienteId);
     }
 
     @Override

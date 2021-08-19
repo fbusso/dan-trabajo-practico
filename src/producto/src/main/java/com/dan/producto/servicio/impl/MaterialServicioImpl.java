@@ -7,6 +7,8 @@ import com.dan.producto.dto.PedidoDto;
 import com.dan.producto.repositorio.MaterialRepositorio;
 import com.dan.producto.servicio.MaterialServicio;
 import com.dan.producto.servicio.ProvisionServicio;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -39,6 +41,12 @@ public class MaterialServicioImpl implements MaterialServicio {
     @Override
     public List<Material> obtenerPorId(List<Integer> ids) {
         return materialRepositorio.findAllByIdIsIn(ids);
+    }
+
+    @Override
+    public Page<Material> obtenerTodos(Integer pagina, Integer cantidadRegistros) {
+        final PageRequest pageRequest = PageRequest.of(pagina, cantidadRegistros);
+        return materialRepositorio.findAll(pageRequest);
     }
 
     @Override
