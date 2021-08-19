@@ -1,7 +1,6 @@
 package com.dan.cuenta.dominio;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "medio_pago_transferencia")

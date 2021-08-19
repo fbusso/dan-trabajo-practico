@@ -1,7 +1,5 @@
 package com.dan.producto.dto;
 
-import javax.persistence.CascadeType;
-import javax.persistence.OneToOne;
 import java.math.BigDecimal;
 
 public class DetallePedidoDto {

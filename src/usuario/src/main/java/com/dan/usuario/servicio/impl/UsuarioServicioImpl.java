@@ -1,6 +1,7 @@
 package com.dan.usuario.servicio.impl;
 
-import com.dan.usuario.dominio.*;
+import com.dan.usuario.dominio.Registrable;
+import com.dan.usuario.dominio.Usuario;
 import com.dan.usuario.excepcion.ReglaDeNegociosExcepcion;
 import com.dan.usuario.repositorio.UsuarioRepositorio;
 import com.dan.usuario.servicio.UsuarioServicio;
