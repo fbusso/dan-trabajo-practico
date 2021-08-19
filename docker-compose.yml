@@ -122,6 +122,28 @@ services:
     ports:
       - "3000:3000"
 
+  # Microservicio de Proxy
+  ms-proxy:
+    container_name: ms-proxy
+    build:
+      context: ./src/proxy
+      dockerfile: Dockerfile
+    env_file:
+      - config.env
+    ports:
+      - "8081:8081"
+
+  # Microservicio de Service Discovery
+  ms-service-discovery:
+    container_name: ms-service-discovery
+    build:
+      context: ./src/servicediscovery
+      dockerfile: Dockerfile
+    env_file:
+      - config.env
+    ports:
+      - "8082:8082"
+
   ## Servicios utilizados para las migraciones de Flyway ##
 
   # Migración de Microservicio de Cuenta #
@@ -161,5 +183,14 @@ services:
     volumes:
       - ./src/usuario/src/main/resources/db/migration:/flyway/sql # Volumen de los archivos de migración
       - ./src/usuario/src/main/resources/db/config:/flyway/conf   # Volumen del archivo de configuración
+    depends_on:
+      - database
+
+  # Consul
+  consul:
+    container_name: consul
+    image: consul
+    ports:
+      - "8500:8500"
     depends_on:
       - database

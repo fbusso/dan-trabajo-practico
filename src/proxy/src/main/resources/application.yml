@@ -1,0 +1,55 @@
+server:
+  port: ${PROXY_PORT:8081}
+
+spring:
+  application:
+    name: PROXY
+  cloud:
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedHeaders: "*"
+            allowCredentials: true
+            allowedOrigins: "http://${FRONTEND_HOST:localhost}:${FRONTEND_PORT:3001}"
+            allowedMethods:
+              - POST
+              - GET
+              - OPTIONS
+      routes:
+        - id: BCRA
+          uri: http://${BCRA_HOST:localhost}:${BCRA_PORT:localhost}/
+          predicates:
+            - Path=/bcra/**
+          allowed-origins:
+          filters:
+            - RewritePath=/bcra, /api
+        - id: PEDIDO
+          uri: lb://PEDIDO
+          predicates:
+            - Path=/pedido/**
+          filters:
+            - RewritePath=/pedido, /api
+        - id: PRODUCTO
+          uri: lb://PRODUCTO
+          predicates:
+            - Path=/producto/**
+          filters:
+            - RewritePath=/producto, /api
+        - id: CUENTA
+          uri: lb://CUENTA
+          predicates:
+            - Path=/cuenta/**
+          filters:
+            - RewritePath=/cuenta, /api
+        - id: USUARIO
+          uri: lb://USUARIO
+          predicates:
+            - Path=/usuario/**
+          filters:
+            - RewritePath=/usuario, /api
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8082}/eureka

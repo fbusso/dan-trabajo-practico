@@ -38,9 +38,7 @@ public class PedidoValidadorImpl implements PedidoValidador {
 
     private Boolean productoValido(Producto producto) {
         return producto != null
-                && producto.getPrecio() != null
                 && StringUtils.isNotBlank(producto.getDescripcion());
-
     }
 
     @Override

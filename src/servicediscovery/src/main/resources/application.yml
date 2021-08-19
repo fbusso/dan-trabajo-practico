@@ -1,0 +1,8 @@
+server:
+    port: ${EUREKA_PORT:8082}
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    service-url:
+      defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8082}/eureka
