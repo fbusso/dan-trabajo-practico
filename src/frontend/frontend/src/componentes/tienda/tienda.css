@@ -1,0 +1,29 @@
+.tienda-container{
+	display: flex;
+	justify-content: center;
+	align-content: flex-start;
+	flex-wrap: wrap;
+	width: 70em;
+	max-height: 45em;
+	padding: 2em;
+	overflow: scroll;
+	scrollbar-width: none;
+	scroll-behavior: smooth;
+}
+
+
+.tienda-container::-webkit-scrollbar { 
+	display: none;
+}
+
+.tienda-card-group{
+	max-height: 45em;
+	display: flex;
+	justify-content: center;
+	align-content: flex-start;
+}
+
+.cart-container{
+	justify-self: flex-end;
+	flex-grow: 1;
+}

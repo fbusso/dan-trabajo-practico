@@ -1,0 +1,22 @@
+.medio-pago-main-col{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1em;
+	padding: 2em;
+}
+.medio-pago-medio-pago{
+	display: flex;
+	align-items: flex-end;
+	gap: 1em;
+	padding: 2em;
+}
+
+.medio-pago-form{
+	display: flex;
+	align-items: flex-start;
+	flex-direction: column;
+	gap: 1em;
+	padding: 2em;
+}

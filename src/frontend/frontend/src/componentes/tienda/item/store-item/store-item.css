@@ -1,0 +1,8 @@
+.item-list {
+	display: flex;
+	justify-content: flex-start;
+	max-width: 71em;
+	margin-top: 1em;
+	flex-wrap: wrap;
+	flex-basis: 60%;
+}

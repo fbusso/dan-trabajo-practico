@@ -1,0 +1,72 @@
+.registro-cliente-container{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 2em;
+}
+
+.registro-cliente-search{
+	padding-left: calc(100% - 15em);
+}
+
+.registro-cliente-col-2{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	margin: 2em;
+	border: 1px dotted grey;
+	padding: 2em;
+	border-radius: 1em;
+	max-height: 15em;
+	overflow: scroll;
+	scrollbar-width: none;
+	scroll-behavior: smooth;
+}
+
+.registro-cliente-table{
+	max-height: 15em;
+}
+
+/* .registro-cliente-main-col{
+
+} */
+
+.registro-cliente-th{
+	text-align: center !important;
+}
+
+.registro-cliente-td{
+	text-align: center !important;
+	width: 11em;
+	padding: 0.5em !important;
+	margin: 0;
+}
+
+.registro-cliente-del{
+	text-align: center !important;
+	width: 2em;
+	padding: 0;
+	margin: 0;
+}
+
+/* 
+.registro-cliente-delete-btn{
+} */
+
+.registro-cliente-heading{
+	margin-top: 1em;
+	margin-left: 1em;
+}
+
+.registro-cliente-col-2::-webkit-scrollbar { 
+	display: none;
+}
+
+.registro-cliente-btn-group{
+	display: flex;
+	justify-content: space-evenly;
+	margin-bottom: 2em;
+	margin-right: 2em;
+	gap: 1em;
+}
