@@ -116,6 +116,28 @@ services:
     ports:
       - "3000:3000"
 
+  # Microservicio de Proxy
+  ms-proxy:
+    container_name: ms-proxy
+    build:
+      context: ./src/proxy
+      dockerfile: Dockerfile
+    env_file:
+      - config.env
+    ports:
+      - "8081:8081"
+
+  # Microservicio de Service Discovery
+  ms-service-discovery:
+    container_name: ms-service-discovery
+    build:
+      context: ./src/servicediscovery
+      dockerfile: Dockerfile
+    env_file:
+      - config.env
+    ports:
+      - "8082:8082"
+
   ## Servicios utilizados para las migraciones de Flyway ##
 
   # Migración de Microservicio de Cuenta #
