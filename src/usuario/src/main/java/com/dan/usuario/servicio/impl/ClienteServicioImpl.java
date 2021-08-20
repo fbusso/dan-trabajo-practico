@@ -44,7 +44,7 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     @Override
     public Cliente obtenerReferencia(Integer id) {
-        return clienteRepositorio.getById(id);
+        return clienteRepositorio.findByIdEquals(id);
     }
 
     @Override

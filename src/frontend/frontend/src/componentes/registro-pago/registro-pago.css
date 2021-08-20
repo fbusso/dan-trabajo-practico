@@ -1,0 +1,48 @@
+.registro-pago-main-col{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 2em;
+	padding: 5em;
+}
+
+.registro-pago-container{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin-bottom: 2em;
+}
+
+.registro-pago-input-disabled{
+	border: 1px solid rgb(211, 211, 211);
+}
+
+.registro-pago-search{
+	padding-left: 1.5em;
+}
+
+.registro-pago-medio-pago{
+	display: flex;
+	flex-direction: column;
+	padding-top: 1.5em;
+	padding-bottom: 1em;
+	gap: 1em;
+	width: 16em;
+}
+
+.registro-pago-btn-group{
+	padding-top: 1em;
+	gap: 1em;
+}
+
+.registro-pago-btn-group{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.css-hxtskf{
+	max-width: unset !important;
+	width: unset !important;
+}

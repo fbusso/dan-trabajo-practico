@@ -1,0 +1,15 @@
+:root {
+    --bg-color: #292c2e;
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+}
+
+button {
+    box-shadow: none !important;
+}
