@@ -49,8 +49,6 @@ services:
       dockerfile: Dockerfile
     env_file:
       - config.env
-    volumes:
-      - ./src/cuenta/src/main/resources/db/migration
     ports:
       - "9003:9003"
     depends_on:
@@ -65,8 +63,6 @@ services:
       dockerfile: Dockerfile
     env_file:
       - config.env
-    volumes:
-      - ./src/pedido/src/main/resources/db/migration
     ports:
       - "9002:9002"
     depends_on:
@@ -82,8 +78,6 @@ services:
       dockerfile: Dockerfile
     env_file:
       - config.env
-    volumes:
-      - ./src/producto/src/main/resources/db/migration
     ports:
       - "9001:9001"
     depends_on:
@@ -98,8 +92,6 @@ services:
       dockerfile: Dockerfile
     env_file:
       - config.env
-    volumes:
-      - ./src/usuario/src/main/resources/db/migration
     ports:
       - "9000:9000"
     depends_on:

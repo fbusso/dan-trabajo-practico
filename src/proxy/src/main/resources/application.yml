@@ -18,7 +18,7 @@ spring:
               - OPTIONS
       routes:
         - id: BCRA
-          uri: http://${BCRA_HOST:localhost}:${BCRA_PORT:localhost}/
+          uri: http://${MS_BCRA_HOST:localhost}:${MS_BCRA_PORT:localhost}/
           predicates:
             - Path=/bcra/**
           allowed-origins:
