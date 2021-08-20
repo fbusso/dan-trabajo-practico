@@ -77,7 +77,7 @@ export const RegistroObra = () => {
 
     let loadClientes = async () => {
         let response = await axios
-            .get(`${path.USUARIO}/clientes?page=0&size=5`, {
+            .get(`${path.USUARIO}/clientes`, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`,
@@ -130,8 +130,10 @@ export const RegistroObra = () => {
 
     let submitForm = async () => {
         validate()
+        let tipoObraAux = obraForm.tipoObra || 'REFORMA'
+        let body = {...obraForm, tipoObra: tipoObraAux}
         let response = await axios
-            .post(`${path.USUARIO}/obras?clienteId=${cliente.clienteId}`, obraForm, {
+            .post(`${path.USUARIO}/obras?clienteId=${cliente.clienteId}`, body, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`,

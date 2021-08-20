@@ -77,3 +77,14 @@
 .detalle-align-center{
 	text-align: center;
 }
+
+.alta-pedido-lista-obras{
+	max-height: 25em;
+	overflow: scroll;
+	scrollbar-width: none;
+	scroll-behavior: smooth;
+}
+
+.alta-pedido-lista-obras::-webkit-scrollbar { 
+	display: none;
+}

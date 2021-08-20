@@ -24,11 +24,12 @@
 }
 */
 .home-tab-panel{
-	max-height: 10em;
+	height: 15em;
 	overflow: scroll;
 	overflow-x: hidden;
 	scrollbar-width: none;
 	scroll-behavior: smooth;
+	position: relative;
 }
 
 .home-tabs{
@@ -69,5 +70,15 @@
 }
 
 .home-tab-panel-2{
-	margin-inline: 6.4em;
+	margin-inline: 6.55em;
+	position: relative;
+}
+
+.home-page-controls{
+	display: flex;
+	position: absolute;
+	gap: 2em;
+	justify-content: center;
+	left: 50%;
+	transform: translateX(-50%);
 }

@@ -20,34 +20,34 @@ spring:
         - id: BCRA
           uri: http://${BCRA_HOST:localhost}:${BCRA_PORT:localhost}/
           predicates:
-            - Path=/bcra/**
+            - Path=/api/bcra/**
           allowed-origins:
           filters:
-            - RewritePath=/bcra, /api
+            - RewritePath=/api/bcra, /api
         - id: PEDIDO
           uri: lb://PEDIDO
           predicates:
-            - Path=/pedido/**
+            - Path=/api/pedido/**
           filters:
-            - RewritePath=/pedido, /api
+            - RewritePath=/api/pedido, /api
         - id: PRODUCTO
           uri: lb://PRODUCTO
           predicates:
-            - Path=/producto/**
+            - Path=/api/producto/**
           filters:
-            - RewritePath=/producto, /api
+            - RewritePath=/api/producto, /api
         - id: CUENTA
           uri: lb://CUENTA
           predicates:
-            - Path=/cuenta/**
+            - Path=/api/cuenta/**
           filters:
-            - RewritePath=/cuenta, /api
+            - RewritePath=/api/cuenta, /api
         - id: USUARIO
           uri: lb://USUARIO
           predicates:
-            - Path=/usuario/**
+            - Path=/api/usuario/**
           filters:
-            - RewritePath=/usuario, /api
+            - RewritePath=/api/usuario, /api
 
 eureka:
   client:

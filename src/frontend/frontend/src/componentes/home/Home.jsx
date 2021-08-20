@@ -15,28 +15,30 @@ import {
     Td,
     Th,
     Tr,
+    IconButton
 } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import keycloak_config from '../../keycloak'
 import Cookies from 'js-cookie'
 import axios from 'axios'
 import { path } from '../../pathConfig'
+import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
 import './Home.css'
 
 export const Home = () => {
-    let [username, setUsername] = useState('')
-    let [pedidos, setPedidos] = useState([])
-    let [pagos, setPagos] = useState([])
-    let [auth, setAuth] = useState({
+    const [username, setUsername] = useState('')
+    const [pedidos, setPedidos] = useState([])
+    const [pagos, setPagos] = useState([])
+    const [auth, setAuth] = useState({
         keycloak: null,
         authenticated: false,
     })
     const keycloak = keycloak_config
     const token = Cookies.get('token')
 
-    let loadPedidos = useCallback(async (page) => {
+    let loadPedidos = useCallback(async () => {
         let responsePedidos = await axios
-            .get(`${path.PEDIDO}/pedido?page=0&size=5`, {
+            .get(`${path.PEDIDO}/pedido`, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`,
@@ -44,14 +46,13 @@ export const Home = () => {
                 withCredentials: true,
             })
             .catch((err) => console.log(err.response))
-        responsePedidos && setPedidos(responsePedidos?.data?.content)
+        responsePedidos && setPedidos(responsePedidos.data?.content)
         // eslint-disable-next-line
-    },[])
+    }, [])
 
-    
     let loadPagos = useCallback(async () => {
         let responsePagos = await axios
-            .get(`${path.CUENTA}/pago?page=0&size=5`, {
+            .get(`${path.CUENTA}/pago`, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`,
@@ -59,9 +60,9 @@ export const Home = () => {
                 withCredentials: true,
             })
             .catch((err) => console.log(err.response))
-        responsePagos && setPagos(responsePagos?.data)
+        responsePagos && setPagos(responsePagos.data)
         // eslint-disable-next-line
-    },[])
+    }, [])
 
     useEffect(() => {
         let getSessionData = async () => {
@@ -76,7 +77,8 @@ export const Home = () => {
             setAuth({ keycloak, authenticated })
             getSessionData()
         })
-    }, [keycloak, loadPedidos, loadPagos])
+        // eslint-disable-next-line
+    }, [keycloak, loadPagos, loadPedidos])
 
     return auth.keycloak && auth.authenticated ? (
         <>
@@ -196,7 +198,7 @@ export const Home = () => {
                         </TabPanel>
                     </TabPanels>
                 </Tabs>
-            </div>
+            </div> 
         </>
     ) : null
 }

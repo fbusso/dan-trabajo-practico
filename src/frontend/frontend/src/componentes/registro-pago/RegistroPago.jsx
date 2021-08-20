@@ -74,7 +74,7 @@ export const RegistroPago = () => {
 
     let loadPedidos = async () => {
         let response = await axios
-            .get(`${path.PEDIDO}/pedido?page=0&size=5`, {
+            .get(`${path.PEDIDO}/pedido`, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`,

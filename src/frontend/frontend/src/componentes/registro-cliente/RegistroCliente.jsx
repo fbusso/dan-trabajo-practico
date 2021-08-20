@@ -17,7 +17,7 @@ import {
     useToast,
 } from '@chakra-ui/react'
 import './registro-cliente.css'
-import { Link } from 'react-router-dom'
+import { Link, useHistory} from 'react-router-dom'
 import { AddIcon, DeleteIcon } from '@chakra-ui/icons'
 import { path } from '../../pathConfig'
 import axios from 'axios'
@@ -34,6 +34,7 @@ let initialValueObra = {
 }
 
 export const RegistroCliente = () => {
+    const history = useHistory()
     const toast = useToast()
     const COLOR = 'yellow'
     const token = Cookies.get('token')
@@ -154,26 +155,31 @@ export const RegistroCliente = () => {
             })
             .catch((err) => {(err.response?.data && typeof err.response.data === 'string') && requestError.push(err.response?.data)})
 
-        response
-            ? toast({
-                  title: 'El cliente se ha registrado con éxito.',
-                  status: 'success',
-                  isClosable: true,
-              })
-            : toast({
-                  title: 'Hay errores en el registro del cliente, intentelo nuevamente.',
-                  description: (
-                      <div>
-                          <ul>
-                              {requestError.map((error, i) => (
-                                  <li key={i}>{error.toString()}</li>
-                              ))}
-                          </ul>
-                      </div>
-                  ),
-                  status: 'error',
-                  isClosable: true,
-              })
+        if(response){
+            setTimeout(() => history.push('/'), 2500)
+            return toast({
+                title: 'El cliente se ha registrado con éxito.',
+                description: 'Será redireccionado a la pantalla de inicio.',
+                status: 'success',
+                isClosable: true,
+            })
+        }
+        else{
+            toast({
+                title: 'Hay errores en el registro del cliente, intentelo nuevamente.',
+                description: (
+                    <div>
+                        <ul>
+                            {requestError.map((error, i) => (
+                                <li key={i}>{error.toString()}</li>
+                            ))}
+                        </ul>
+                    </div>
+                ),
+                status: 'error',
+                isClosable: true,
+            })
+        } 
     }
 
     useEffect(() => {

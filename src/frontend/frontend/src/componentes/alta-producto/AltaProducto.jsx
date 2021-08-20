@@ -86,9 +86,11 @@ export const AltaProducto = () => {
 
     let handleSubmit = async (e) => {
         validate()
+        let unidadProducto = productoForm.unidad || 'KILOGRAMOS'
+        let body = {...productoForm, unidad: unidadProducto}
         let response =
             await axios.post(`${path.PRODUCTO}/material`,
-            productoForm,
+            body,
             {
                 headers: {'Content-Type': 'application/json', 'Authorization': `Bearer ${token}`},
                 withCredentials: true

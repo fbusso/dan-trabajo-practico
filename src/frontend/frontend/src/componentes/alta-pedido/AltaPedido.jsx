@@ -160,7 +160,7 @@ export const AltaPedido = () => {
 
     let loadObras = async () => {
         let response = await axios
-            .get(`${path.USUARIO}/obras?page=0&size=5`, {
+            .get(`${path.USUARIO}/obras`, {
                 headers: {
                     'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`,
@@ -168,8 +168,7 @@ export const AltaPedido = () => {
                 withCredentials: true,
             })
             .catch((err) => console.log(err.response))
-        response && setObras(response.data.content)
-        console.log(response)
+        response && setObras(response.data?.content)
     }
 
     useEffect(() => {
@@ -378,7 +377,7 @@ export const AltaPedido = () => {
 
             <Modal isOpen={isOpen} onClose={onClose} isCentered>
                 <ModalOverlay />
-                <ModalContent>
+                <ModalContent className="alta-pedido-lista-obras">
                     <ModalHeader>Obras</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
