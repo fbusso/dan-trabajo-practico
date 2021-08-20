@@ -1,0 +1,90 @@
+.alta-pedido-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: row;
+	padding-left: 1.5em;
+	gap: 5em;
+	margin-bottom: 2em;
+}
+
+.alta-pedido-search{
+	padding-left: 1.5em;
+}
+
+.alta-pedido-detalle-input{
+	max-width: 15em;
+}
+
+.alta-pedido-main-col{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin: 2em;
+	padding: 3em;
+	padding-right: 5em;
+}
+
+.alta-pedido-date-input{
+	margin-top: 0;
+}
+
+.detalle-stack{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 2em;
+}
+
+#material{
+	margin-top: 1em;
+}
+
+#alta-pedido-detalle{
+	margin-top: 1.7em;
+}
+
+.detalle-container{
+	width: 100%;
+	border: 1px solid var(--chakra-colors-gray-200);
+	border-radius: 0.6em;
+	padding: 0.5em;
+	margin: 1em;
+	max-height: 12em;
+	overflow: scroll;
+	scrollbar-width: none;
+	scroll-behavior: smooth;
+}
+
+.detalle-container::-webkit-scrollbar { 
+	display: none;
+}
+
+.detalle-row-container{
+	display: flex;
+	justify-content: space-between;
+}
+
+.delete-btn-disappear{
+	display: none !important;
+}
+
+.delete-btn{
+	display: inline-flex;
+}
+
+.detalle-align-center{
+	text-align: center;
+}
+
+.alta-pedido-lista-obras{
+	max-height: 25em;
+	overflow: scroll;
+	scrollbar-width: none;
+	scroll-behavior: smooth;
+}
+
+.alta-pedido-lista-obras::-webkit-scrollbar { 
+	display: none;
+}

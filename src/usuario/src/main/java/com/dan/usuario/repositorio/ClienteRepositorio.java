@@ -20,6 +20,8 @@ public interface ClienteRepositorio extends JpaRepository<Cliente, Integer> {
 
     Optional<Cliente> findByIdAndFechaBajaIsNull(Integer id);
 
+    Cliente findByIdEquals(Integer id);
+
     @Query("SELECT c FROM Cliente c JOIN Obra o ON o.cliente = c AND o.id = :obraId AND c.fechaBaja IS NULL")
     Optional<Cliente> obtenerPorObraId(@Param("obraId")Integer obraId);
 }

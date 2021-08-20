@@ -1,0 +1,33 @@
+.item-footer{
+	margin-top: 0.6em;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.card-item{
+	margin: 1em;
+	width: 11em;
+}
+
+.image-container{
+	position: relative;
+}
+.card-item:hover::after{
+	content: "";
+	position: absolute;
+	top: 0;
+	bottom: 5em;
+	left: 0;
+	right: 0;
+	opacity: 0.6;
+	border: 1px solid rgb(28, 110, 215);
+	background: rgb(28, 110, 215);
+}
+
+.card-item:hover{
+	transform: translateY(-3%);
+	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+	0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+	cursor: pointer;
+}

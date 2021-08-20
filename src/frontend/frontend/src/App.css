@@ -1,0 +1,34 @@
+.App {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    padding: 2em;
+}
+
+.main-box {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 0.5em;
+}
+
+.control-btn-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1em;
+    width: 100%;
+}
+
+.entity-list-focus {
+    background-color: rgb(219, 219, 219) !important;
+}
+
+.entity-list:hover {
+    background-color: rgb(243, 243, 243);
+}

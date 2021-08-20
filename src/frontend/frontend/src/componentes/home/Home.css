@@ -1,0 +1,84 @@
+.home-container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin: 1em;
+}
+
+.home-details{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 3em;
+}
+
+.home-user-details{
+	display: flex;
+}
+
+/*
+.home-panel{
+
+}
+*/
+.home-tab-panel{
+	height: 15em;
+	overflow: scroll;
+	overflow-x: hidden;
+	scrollbar-width: none;
+	scroll-behavior: smooth;
+	position: relative;
+}
+
+.home-tabs{
+	margin-top: 1em;
+}
+
+.home-tab-header{
+	display: flex;
+	justify-content: center !important;
+}
+
+.home-user-container{
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	font-size: 0.9em;
+	margin: 0em;
+	margin-right: 0.5em;
+	margin-top: 0.2em;
+}
+
+/*
+#home-user{
+
+}
+*/
+
+#home-role{
+	font-style: italic;
+	color: rgb(146, 145, 145);
+}
+
+.home-registro{
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 0.5em;
+	gap: 0.5em;
+}
+
+.home-tab-panel-2{
+	margin-inline: 6.55em;
+	position: relative;
+}
+
+.home-page-controls{
+	display: flex;
+	position: absolute;
+	gap: 2em;
+	justify-content: center;
+	left: 50%;
+	transform: translateX(-50%);
+}
