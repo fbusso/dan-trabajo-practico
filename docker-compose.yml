@@ -195,15 +195,12 @@ services:
     depends_on:
       - database
 
-  #frontend
+  # Frontend
   frontend:
     container_name: frontend
     build:
       context: ./src/frontend
       dockerfile: Dockerfile
-    volumes:
-      - './src/frontend/frontend/:/frontend'
-      - '/src/frontend/frontend/node_modules'
     stdin_open: true
     ports:
       - "4200:4200"

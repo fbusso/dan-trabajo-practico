@@ -1,20 +1,13 @@
-# pull official base image
-FROM node:14.15.3-alpine
+# build project
+FROM node:12.19-alpine AS build
+WORKDIR /frontend
+COPY ./frontend /frontend
+RUN npm ci
+RUN npm run-script build
 
-# set working directory
-WORKDIR /src/frontend/
+# create server image
+FROM nginx:1.19.3-alpine AS create_server
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /frontend/build /usr/share/nginx/html
 
-ENV PATH ./frontend/node_modules/.bin:$PATH
-
-# install app dependencies
-COPY ./frontend/package.json .
-COPY ./frontend/package-lock.json .
-RUN npm install --silent
-RUN npm install react-scripts@4.0.3 -g --silent
-EXPOSE 4200
-
-# add app
-COPY . .
-
-# start app
-CMD ["npm", "start"]
+CMD nginx -g "daemon off;"
