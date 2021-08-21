@@ -1,5 +1,5 @@
 export const path = {
-    AUTH: 'http://localhost:8080',
+    AUTH: 'http://keycloak:8080',
     PRODUCTO: 'http://localhost:8081/api/producto',
     PEDIDO: 'http://localhost:8081/api/pedido',
     USUARIO: 'http://localhost:8081/api/usuario',
