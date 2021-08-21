@@ -1,6 +1,6 @@
 package com.dan.pago.controlador;
 
-import com.dan.pago.dominio.Carrito;
+import com.dan.pago.dto.PedidoDto;
 import com.dan.pago.servicio.MercadoPagoServicio;
 import com.mercadopago.exceptions.MPException;
 import org.springframework.http.HttpStatus;
@@ -18,9 +18,9 @@ public class PagoControlador {
     }
 
     @PostMapping
-    public ResponseEntity<String> generarLinkPago(@RequestBody Carrito carrito) {
+    public ResponseEntity<String> generarLinkPago(@RequestBody PedidoDto pedidoDto) {
         try {
-            return new ResponseEntity<>(mercadoPagoServicio.generarLinkPago(carrito), HttpStatus.CREATED);
+            return new ResponseEntity<>(mercadoPagoServicio.generarPreferencia(pedidoDto), HttpStatus.CREATED);
         } catch (MPException e) {
             return new ResponseEntity<>("ERROR", HttpStatus.NOT_ACCEPTABLE);
         }
