@@ -1,6 +1,15 @@
 server:
   port: ${PROXY_PORT:8081}
 
+logging:
+  level:
+    reactor:
+      netty: INFO
+    org:
+      springframework:
+        cloud:
+          gateway: INFO
+
 spring:
   application:
     name: PROXY
@@ -11,7 +20,10 @@ spring:
           '[/**]':
             allowedHeaders: "*"
             allowCredentials: true
-            allowedOrigins: "http://${FRONTEND_HOST:localhost}:${FRONTEND_PORT:4200}"
+            allowedOrigins:
+              - "http://localhost:3000"
+              - "http://localhost:4200"
+              - "http://${FRONTEND_HOST:localhost}:${FRONTEND_PORT:4200}"
             allowedMethods:
               - POST
               - GET
