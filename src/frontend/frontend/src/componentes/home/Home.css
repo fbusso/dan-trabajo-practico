@@ -82,3 +82,7 @@
 	left: 50%;
 	transform: translateX(-50%);
 }
+
+.home-tab-panel::-webkit-scrollbar { 
+	display: none;
+}
