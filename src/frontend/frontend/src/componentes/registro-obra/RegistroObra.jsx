@@ -22,10 +22,12 @@ import {
     Th,
     Td,
     Tr,
-    useToast
+    useToast,
+    Text,
+    Tooltip
 } from '@chakra-ui/react'
 import keycloak_config from '../../keycloak'
-import { SearchIcon } from '@chakra-ui/icons'
+import { SearchIcon, RepeatIcon } from '@chakra-ui/icons'
 import { Link, useHistory } from 'react-router-dom'
 import { path } from '../../pathConfig'
 import axios from 'axios'
@@ -287,7 +289,8 @@ export const RegistroObra = () => {
                 <ModalContent>
                     <ModalHeader>Clientes</ModalHeader>
                     <ModalCloseButton />
-                    <ModalBody>
+                    <ModalBody className="registro-obra-modal-body">
+                        {clientes?.length ?(
                         <Table>
                             <Thead>
                                 <Tr>
@@ -298,8 +301,7 @@ export const RegistroObra = () => {
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {clientes &&
-                                    clientes.map((e, i) => (
+                                {clientes.map((e, i) => (
                                         <Tr
                                             key={i}
                                             onClick={() =>
@@ -318,7 +320,22 @@ export const RegistroObra = () => {
                                         </Tr>
                                     ))}
                             </Tbody>
-                        </Table>
+                        </Table>) : (
+                                <div className="home-reload">
+                                    <Text color="grey">
+                                        No se encontraron clientes
+                                    </Text>
+                                    <Tooltip hasArrow label="Recargar clientes">
+                                        <IconButton
+                                            variant="ghost"
+                                            size="lg"
+                                            icon={<RepeatIcon />}
+                                            onClick={loadClientes}
+                                            style={{ borderRadius: '50%' }}
+                                        />
+                                    </Tooltip>
+                                </div>
+                            )}
                     </ModalBody>
                     <ModalFooter>
                         <div className="control-btn-group">

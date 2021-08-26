@@ -5,4 +5,5 @@ export const path = {
     USUARIO: 'http://localhost:8081/api/usuario',
     BCRA: 'http://localhost:8081/api/bcra',
     CUENTA: 'http://localhost:8081/api/cuenta',
+    PAGO: 'http://localhost:9014/api/pago'
 }

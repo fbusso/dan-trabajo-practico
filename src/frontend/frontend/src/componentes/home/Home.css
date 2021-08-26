@@ -30,6 +30,7 @@
 	scrollbar-width: none;
 	scroll-behavior: smooth;
 	position: relative;
+	width: 60em;
 }
 
 .home-tabs{
@@ -69,9 +70,13 @@
 	gap: 0.5em;
 }
 
-.home-tab-panel-2{
-	margin-inline: 6.55em;
-	position: relative;
+.home-tab-panel{
+	width: 50em !important;
+	
+}
+
+.panel{
+	height: 100%;
 }
 
 .home-page-controls{
@@ -85,4 +90,19 @@
 
 .home-tab-panel::-webkit-scrollbar { 
 	display: none;
+}
+
+.home-reload{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.home-icon-reload{
+	border-radius: 50% !important;
+	font-size: 3em !important;
+	margin-top: 0.5em !important;
+	color: grey !important;
 }

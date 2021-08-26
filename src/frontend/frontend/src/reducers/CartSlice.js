@@ -11,10 +11,10 @@ let CartSlice = createSlice({
          let index = state.map((elem) => elem.id).indexOf(item.id)
 
          if (index === -1) {
-            item.quantity = 1
+            item.cantidad = 1
             state.push(item)
          } else {
-            state[index].quantity += 1
+            state[index].cantidad += 1
          }
       },
       removeFromCart(state, action) {
@@ -22,9 +22,9 @@ let CartSlice = createSlice({
          return state.filter((elem) => elem.id !== id)
       },
       setQuantity(state, action) {
-         let { id, quantity } = action.payload
+         let { id, cantidad } = action.payload
          return state.map((elem) =>
-            elem.id === id ? { ...elem, quantity } : elem
+            elem.id === id ? { ...elem, cantidad } : elem
          )
       },
       clear() {

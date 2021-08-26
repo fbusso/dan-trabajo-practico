@@ -1,17 +1,16 @@
 import React from "react"
 import { useDispatch } from "react-redux"
-import { Box, Image, Text, IconButton} from "@chakra-ui/react"
-import { AddIcon } from "@chakra-ui/icons"
+import { Box, Image, Text, Badge } from "@chakra-ui/react"
 import { addAction } from "../../../reducers/CartSlice"
 import "./item.css"
 
-export let Item = ({ id, name, price }) => {
+export let Item = ({ id, nombre, descripcion, precio }) => {
    const dispatch = useDispatch()
 
    let url = require("../../../assets/placeholder.png").default
 
    return (	
-		<Box className="card-item" maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" onClick={() => dispatch(addAction({ id, name, price }))}>
+		<Box className="card-item" maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" onClick={() => dispatch(addAction({ id, nombre, descripcion, precio }))}>
 			<div className="image-container">
 				<Image className="item-image" src={url} alt={'producto'} objectFit="fill"/>
 				<div className="image-overlay"/>
@@ -25,11 +24,19 @@ export let Item = ({ id, name, price }) => {
 						isTruncated
 						textAlign="center"
 						className="item-footer">
-						{name}
-						<Box>
-						$ {price}
-						</Box>
+						<Text className="item-name">
+							{nombre}
+						</Text>
+
 					</Box>
+
+					<Box>
+						<Text fontSize="small" className="item-description">{descripcion}</Text>
+					</Box>
+
+					<Badge className="item-price" colorScheme="blue">
+						$ {precio}
+						</Badge>
 			</Box>
 		</Box>
    )

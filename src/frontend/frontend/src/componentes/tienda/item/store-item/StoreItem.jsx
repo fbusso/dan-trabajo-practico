@@ -1,59 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { path } from '../../../../pathConfig'
+import Cookies from 'js-cookie'
 import { Item } from '../Item'
 import './store-item.css'
-
-let items = [
-	{
-		 id: 1,
-		 name: "item1",
-		 price: 400,
-	},
-	{
-		 id: 2,
-		 name: "item2",
-		 price: 400,
-	},
-	{
-		 id: 3,
-		 name: "item3",
-		 price: 400,
-	},
-	{
-		 id: 4,
-		 name: "item4",
-		 price: 400,
-	},
-	{
-		 id: 5,
-		 name: "item5",
-		 price: 400,
-	},
-	{
-		 id: 6,
-		 name: "item6",
-		 price: 400,
-	},
-	{
-		 id: 7,
-		 name: "item7",
-		 price: 400,
-	},
-	{
-		 id: 8,
-		 name: "item8",
-		 price: 400,
-	},
-]
+import axios from 'axios'
 
 export let StoreItem = () => {
+	const token = Cookies.get('token')
+	const [ productos, setProductos ] = useState([])
+
+	useEffect(() => {
+		const getItems = async () => {
+			const response = await axios
+			.get(`${path.PRODUCTO}/material`, {
+					headers: {
+							'Content-Type': 'application/json',
+							Authorization: `Bearer ${token}`,
+					},
+					withCredentials: true,
+			})
+			.catch((err) => {console.log(err.response?.data)})
+
+			setProductos(response?.data.content)
+		}
+		getItems()
+	}, [])
+
 	return(
 		<div className="item-list">
-			{items.map((item) => (
+			{productos && productos.map((item) => (
 				<Item
-						key={item.id}
-						id={item.id}
-						name={item.name}
-						price={item.price}
+					key={item.id}
+					id={item.id}
+					nombre={item.nombre}
+					descripcion={item.descripcion}
+					precio={item.precio}
 				/>
 			))}
 		</div>

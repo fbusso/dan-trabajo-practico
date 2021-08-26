@@ -18,12 +18,13 @@ export let Cart = () => {
 								<Text>Borrar</Text>
 							</div>
 							<div className="cart-container">
-										{cartList.map((item) => (
+										{cartList && cartList.map((item) => (
 											<CartItem
 													key={item.id}
 													id={item.id}
-													name={item.name}
-													price={item.price}
+													nombre={item.nombre}
+													descripcion={item.descripcion}
+													precio={item.precio}
 											/>
 										))}
 							</div>

@@ -1,7 +1,6 @@
 .item-footer{
-	margin-top: 0.6em;
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
 }
 
@@ -17,12 +16,11 @@
 	content: "";
 	position: absolute;
 	top: 0;
-	bottom: 5em;
+	bottom: 0;
 	left: 0;
 	right: 0;
-	opacity: 0.6;
-	border: 1px solid rgb(28, 110, 215);
-	background: rgb(28, 110, 215);
+	opacity: 0.1;
+	background: grey;
 }
 
 .card-item:hover{
@@ -30,4 +28,31 @@
 	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
 	0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 	cursor: pointer;
+}
+
+.item-description{
+	width: 8em;
+	text-align: left;
+}
+
+.item-name{
+	width: 7em;
+	word-wrap: wrap;
+	text-align: left;
+	align-self: flex-start;
+}
+
+.item-price{
+	align-self: flex-end;
+	width: fit-content;
+}
+
+.css-rmlqu9{
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
+.css-rmlqu9{
+	padding: 0.5em !important;
 }
