@@ -322,9 +322,6 @@ export const RegistroObra = () => {
                             </Tbody>
                         </Table>) : (
                                 <div className="home-reload">
-                                    <Text color="grey">
-                                        No se encontraron clientes
-                                    </Text>
                                     <Tooltip hasArrow label="Recargar clientes">
                                         <IconButton
                                             variant="ghost"
@@ -334,6 +331,9 @@ export const RegistroObra = () => {
                                             style={{ borderRadius: '50%' }}
                                         />
                                     </Tooltip>
+                                    <Text color="grey">
+                                        No se encontraron clientes
+                                    </Text>
                                 </div>
                             )}
                     </ModalBody>

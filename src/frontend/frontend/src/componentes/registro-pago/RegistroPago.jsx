@@ -228,9 +228,6 @@ export const RegistroPago = () => {
                             </Table>
                         ) : (
                             <div className="home-reload">
-                                <Text color="grey">
-                                    No se encontraron pedidos
-                                </Text>
                                 <Tooltip hasArrow label="Recargar pedidos">
                                     <IconButton
                                         variant="ghost"
@@ -240,6 +237,9 @@ export const RegistroPago = () => {
                                         style={{ borderRadius: '50%' }}
                                     />
                                 </Tooltip>
+                                <Text color="grey">
+                                    No se encontraron pedidos
+                                </Text>
                             </div>
                         )}
                     </ModalBody>

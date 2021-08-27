@@ -421,9 +421,6 @@ export const AltaPedido = () => {
                             </Tbody>
                         </Table>) : (
                                 <div className="home-reload">
-                                    <Text color="grey">
-                                        No se encontraron obras
-                                    </Text>
                                     <Tooltip hasArrow label="Recargar obras">
                                         <IconButton
                                             variant="ghost"
@@ -433,6 +430,9 @@ export const AltaPedido = () => {
                                             style={{ borderRadius: '50%' }}
                                         />
                                     </Tooltip>
+                                    <Text color="grey">
+                                        No se encontraron obras
+                                    </Text>
                                 </div>
                             )}
                     </ModalBody>

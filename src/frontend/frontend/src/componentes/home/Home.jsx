@@ -173,9 +173,6 @@ export const Home = () => {
                                 </Table>
                             ) : (
                                 <div className="home-reload">
-                                    <Text color="grey">
-                                        No se encontraron pedidos
-                                    </Text>
                                     <Tooltip hasArrow label="Recargar pedidos">
                                         <IconButton
                                             className="home-icon-reload"
@@ -185,6 +182,9 @@ export const Home = () => {
                                             onClick={loadPedidos}
                                         />
                                     </Tooltip>
+                                    <Text color="grey">
+                                        No se encontraron pedidos
+                                    </Text>
                                 </div>
                             )}
                         </TabPanel>
@@ -216,9 +216,6 @@ export const Home = () => {
                                 </Table>
                             ) : (
                                 <div className="home-reload">
-                                    <Text color="grey">
-                                        No se encontraron pagos
-                                    </Text>
                                     <Tooltip hasArrow label="Recargar pagos">
                                         <IconButton
                                             className="home-icon-reload"
@@ -228,6 +225,9 @@ export const Home = () => {
                                             onClick={loadPagos}
                                         />
                                     </Tooltip>
+                                    <Text color="grey">
+                                        No se encontraron pagos
+                                    </Text>
                                 </div>
                             )}
                         </TabPanel>
