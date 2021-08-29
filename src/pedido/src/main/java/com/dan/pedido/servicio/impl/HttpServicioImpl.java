@@ -61,7 +61,7 @@ public class HttpServicioImpl implements HttpServicio {
         return dto;
     }
 
-    public void respuestaPorDefecto() throws ReglaDeNegociosExcepcion {
+    public void respuestaPorDefecto(Exception e) throws ReglaDeNegociosExcepcion {
         throw new ErrorDeConexionExcepcion();
     }
 
