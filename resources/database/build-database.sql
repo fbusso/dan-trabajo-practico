@@ -18,6 +18,10 @@ CREATE DATABASE "cuenta-db";
 CREATE USER cuenta_application WITH PASSWORD 'AQG5VAEZCKBzEwFg';
 GRANT ALL PRIVILEGES ON DATABASE "cuenta-db" to cuenta_application;
 
+CREATE DATABASE "pago-db";
+CREATE USER pago_application WITH PASSWORD 'djavLLVGEmS2AnRZ';
+GRANT ALL PRIVILEGES ON DATABASE "pago-db" to pago_application;
+
 CREATE DATABASE "keycloak-db";
 CREATE USER keycloak_application WITH PASSWORD 'FNvJ1ThgdcvU390G';
 GRANT ALL PRIVILEGES ON DATABASE "keycloak-db" to keycloak_application;

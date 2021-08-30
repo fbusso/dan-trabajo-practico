@@ -27,3 +27,7 @@
 	align-items: center;
 	gap: 1em
 }
+
+.registro-obra-modal-body{
+	width: 34em;
+}

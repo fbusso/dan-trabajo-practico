@@ -2,8 +2,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
-	border: 1px dotted rgb(155, 155, 155);
-	padding: 1em;
+	padding: 0.2em;
 	border-radius: 0.5em;
 	margin-top: 0.5em;
 	gap: 2em;
@@ -11,4 +10,8 @@
 
 .cart-number-item{
 	width: 4em;
+}
+
+.cart-item-name{
+	max-width: 4em;
 }

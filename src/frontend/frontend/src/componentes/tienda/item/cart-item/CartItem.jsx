@@ -9,23 +9,23 @@ import "./cart-item.css"
 import { deleteAction, setQuantityAction } from '../../../../reducers/CartSlice'
 import { useDispatch, useSelector } from 'react-redux'
 
-export let CartItem = ({ id, name, price }) => {
+export let CartItem = ({ id, nombre, precio }) => {
 
 	const dispatch = useDispatch()
 	let item = useSelector((state) => state.find((elem) => elem.id === id))
-	let quantity = item.quantity
+	let cantidad = item.cantidad
 
 	let setQuantityHandler = (e) => {
 		let value = e.target.value || 0
-		dispatch(setQuantityAction({ id, quantity: parseInt(value) }))
+		dispatch(setQuantityAction({ id, cantidad: parseInt(value) }))
 	}
 
 	return(
 		<div className="cart-item">
-			<Text>{name}</Text>
-			<Text>$ {price}</Text>
+			<Text className="cart-item-name">{nombre}</Text>
+			<Text>$ {precio}</Text>
 			<div className="cart-number-item">
-				<Input onChange={e => setQuantityHandler(e)} value={quantity} type="number" />
+				<Input onChange={e => setQuantityHandler(e)} value={cantidad} type="number" />
 			</div>
 			<IconButton colorScheme="red" icon={<DeleteIcon/>} size="sm" onClick={() => dispatch(deleteAction(id))}/>
 		</div>

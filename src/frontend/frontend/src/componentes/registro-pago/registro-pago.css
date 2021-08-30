@@ -4,7 +4,7 @@
 	justify-content: center;
 	align-items: center;
 	margin: 2em;
-	padding: 5em;
+	padding: 2em;
 }
 
 .registro-pago-container{
@@ -45,4 +45,8 @@
 .css-hxtskf{
 	max-width: unset !important;
 	width: unset !important;
+}
+
+.registro-pago-modal-body{
+	width: 55em;
 }

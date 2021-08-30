@@ -88,3 +88,7 @@
 .alta-pedido-lista-obras::-webkit-scrollbar { 
 	display: none;
 }
+
+.alta-pedido-modal-body{
+	width: 54em;
+}
