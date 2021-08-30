@@ -15,14 +15,15 @@ import {
     Td,
     Th,
     Tr,
-    IconButton
+    IconButton,
+    Tooltip,
 } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
 import keycloak_config from '../../keycloak'
 import Cookies from 'js-cookie'
 import axios from 'axios'
 import { path } from '../../pathConfig'
-import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons'
+import { RepeatIcon } from '@chakra-ui/icons'
 import './Home.css'
 
 export const Home = () => {
@@ -67,13 +68,15 @@ export const Home = () => {
     useEffect(() => {
         let getSessionData = async () => {
             let { username } = await keycloak.loadUserProfile()
-            let token = await keycloak.token
+            let token = keycloak.token
             Cookies.set('token', token)
             setUsername(username)
             await loadPedidos()
             await loadPagos()
         }
-        keycloak.init({ onLoad: 'login-required' }).then((authenticated) => {
+        
+        keycloak.init({ onLoad: 'login-required' })
+        .then((authenticated) => {
             setAuth({ keycloak, authenticated })
             getSessionData()
         })
@@ -90,7 +93,7 @@ export const Home = () => {
                     <div className="home-user-details">
                         <div className="home-user-container">
                             <Text id="home-user">{username}</Text>
-                            <Text id="home-role">ROL: {'USUARIO'}</Text>
+                            <Text id="home-role">ROL: {'EMPLEADO'}</Text>
                         </div>
                         <Avatar
                             bg="red.500"
@@ -140,22 +143,22 @@ export const Home = () => {
                         <Tab onClick={loadPagos}>Pagos</Tab>
                     </TabList>
                     <TabPanels className="home-tab-panel">
-                        <TabPanel>
-                            <Table>
-                                <Thead>
-                                    <Tr>
-                                        <Th>Id</Th>
-                                        <Th>Estado</Th>
-                                        <Th>Fecha</Th>
-                                        <Th>Id Obra</Th>
-                                        <Th>Descripcion obra</Th>
-                                        <Th>Id Cliente</Th>
-                                        <Th>Costo total</Th>
-                                    </Tr>
-                                </Thead>
-                                <Tbody>
-                                    {pedidos &&
-                                        pedidos.map((e, i) => (
+                        <TabPanel className="panel">
+                            {pedidos?.length ? (
+                                <Table>
+                                    <Thead>
+                                        <Tr>
+                                            <Th>Id</Th>
+                                            <Th>Estado</Th>
+                                            <Th>Fecha</Th>
+                                            <Th>Id Obra</Th>
+                                            <Th>Descripcion obra</Th>
+                                            <Th>Id Cliente</Th>
+                                            <Th>Costo total</Th>
+                                        </Tr>
+                                    </Thead>
+                                    <Tbody>
+                                        {pedidos.map((e, i) => (
                                             <Tr key={i} id={`pedido-elem-${i}`}>
                                                 <Td>{e.id}</Td>
                                                 <Td>{e.estadoPedido}</Td>
@@ -166,23 +169,39 @@ export const Home = () => {
                                                 <Td>$ {e.costoTotal}</Td>
                                             </Tr>
                                         ))}
-                                </Tbody>
-                            </Table>
+                                    </Tbody>
+                                </Table>
+                            ) : (
+                                <div className="home-reload">
+                                    <Tooltip hasArrow label="Recargar pedidos">
+                                        <IconButton
+                                            className="home-icon-reload"
+                                            variant="ghost"
+                                            size="lg"
+                                            icon={<RepeatIcon />}
+                                            onClick={loadPedidos}
+                                        />
+                                    </Tooltip>
+                                    <Text color="grey">
+                                        No se encontraron pedidos
+                                    </Text>
+                                </div>
+                            )}
                         </TabPanel>
-                        <TabPanel className="home-tab-panel-2">
-                            <Table>
-                                <Thead>
-                                    <Tr>
-                                        <Th>Id</Th>
-                                        <Th>Id Pedido</Th>
-                                        <Th>Fecha del pago</Th>
-                                        <Th>Medio pago</Th>
-                                        <Th>Observacion</Th>
-                                    </Tr>
-                                </Thead>
-                                <Tbody>
-                                    {pagos &&
-                                        pagos.map((e, i) => (
+                        <TabPanel className="home-tab-panel">
+                            {pagos?.length ? (
+                                <Table>
+                                    <Thead>
+                                        <Tr>
+                                            <Th>Id</Th>
+                                            <Th>Id Pedido</Th>
+                                            <Th>Fecha del pago</Th>
+                                            <Th>Medio pago</Th>
+                                            <Th>Observacion</Th>
+                                        </Tr>
+                                    </Thead>
+                                    <Tbody>
+                                        {pagos.map((e, i) => (
                                             <Tr key={i} id={`pago-elem-${i}`}>
                                                 <Td>{e.id}</Td>
                                                 <Td>{e.pedidoId}</Td>
@@ -193,12 +212,28 @@ export const Home = () => {
                                                 </Td>
                                             </Tr>
                                         ))}
-                                </Tbody>
-                            </Table>
+                                    </Tbody>
+                                </Table>
+                            ) : (
+                                <div className="home-reload">
+                                    <Tooltip hasArrow label="Recargar pagos">
+                                        <IconButton
+                                            className="home-icon-reload"
+                                            variant="ghost"
+                                            size="lg"
+                                            icon={<RepeatIcon />}
+                                            onClick={loadPagos}
+                                        />
+                                    </Tooltip>
+                                    <Text color="grey">
+                                        No se encontraron pagos
+                                    </Text>
+                                </div>
+                            )}
                         </TabPanel>
                     </TabPanels>
                 </Tabs>
-            </div> 
+            </div>
         </>
     ) : null
 }

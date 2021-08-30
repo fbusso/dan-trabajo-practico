@@ -24,10 +24,11 @@ import {
     Th,
     Td,
     TableCaption,
-    useToast
+    useToast,
+    Tooltip
 } from '@chakra-ui/react'
 import './alta-pedido.css'
-import { SearchIcon, AddIcon, DeleteIcon } from '@chakra-ui/icons'
+import { SearchIcon, AddIcon, DeleteIcon, RepeatIcon } from '@chakra-ui/icons'
 import { Link, useHistory } from 'react-router-dom'
 import axios from 'axios'
 import Cookies from 'js-cookie'
@@ -380,7 +381,8 @@ export const AltaPedido = () => {
                 <ModalContent className="alta-pedido-lista-obras">
                     <ModalHeader>Obras</ModalHeader>
                     <ModalCloseButton />
-                    <ModalBody>
+                    <ModalBody className="alta-pedido-modal-body">
+                        { obras?.length ? (
                         <Table>
                             <Thead>
                                 <Tr>
@@ -394,7 +396,7 @@ export const AltaPedido = () => {
                                 </Tr>
                             </Thead>
                             <Tbody>
-                                {obras &&
+                                {
                                     obras.map((e, i) => (
                                         <Tr
                                             key={i}
@@ -417,7 +419,22 @@ export const AltaPedido = () => {
                                         </Tr>
                                     ))}
                             </Tbody>
-                        </Table>
+                        </Table>) : (
+                                <div className="home-reload">
+                                    <Tooltip hasArrow label="Recargar obras">
+                                        <IconButton
+                                            variant="ghost"
+                                            size="lg"
+                                            icon={<RepeatIcon />}
+                                            onClick={loadObras}
+                                            style={{ borderRadius: '50%' }}
+                                        />
+                                    </Tooltip>
+                                    <Text color="grey">
+                                        No se encontraron obras
+                                    </Text>
+                                </div>
+                            )}
                     </ModalBody>
                     <ModalFooter>
                         <div className="control-btn-group">

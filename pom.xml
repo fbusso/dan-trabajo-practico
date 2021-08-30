@@ -14,6 +14,7 @@
         <module>src/producto</module>
         <module>src/bcra</module>
         <module>src/cuenta</module>
+        <module>src/pago</module>
         <module>src/proxy</module>
         <module>src/servicediscovery</module>
 <!-- <module>src/cliente</module> -->

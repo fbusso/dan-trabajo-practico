@@ -23,9 +23,10 @@ import {
     Tr,
     Th,
     Td,
+    Tooltip,
 } from '@chakra-ui/react'
 import './registro-pago.css'
-import { SearchIcon } from '@chakra-ui/icons'
+import { SearchIcon, RepeatIcon } from '@chakra-ui/icons'
 import { Link } from 'react-router-dom'
 import { path } from '../../pathConfig'
 import axios from 'axios'
@@ -170,11 +171,7 @@ export const RegistroPago = () => {
                             : `/alta/pago/`
                     }
                 >
-                    <Button
-                        colorScheme={COLOR}
-                        variant="solid"
-                        size="lg"
-                    >
+                    <Button colorScheme={COLOR} variant="solid" size="lg">
                         Continuar
                     </Button>
                 </Link>
@@ -190,22 +187,22 @@ export const RegistroPago = () => {
                 <ModalContent>
                     <ModalHeader>Pedidos</ModalHeader>
                     <ModalCloseButton />
-                    <ModalBody>
-                        <Table>
-                            <Thead>
-                                <Tr>
-                                    <Th>Id</Th>
-                                    <Th>Estado</Th>
-                                    <Th>Fecha</Th>
-                                    <Th>Id Obra</Th>
-                                    <Th>Descripcion obra</Th>
-                                    <Th>Id Cliente</Th>
-                                    <Th>Costo total</Th>
-                                </Tr>
-                            </Thead>
-                            <Tbody>
-                                {pedidos &&
-                                    pedidos.map((e, i) => (
+                    <ModalBody className="registro-pago-modal-body">
+                        {pedidos?.length ? (
+                            <Table>
+                                <Thead>
+                                    <Tr>
+                                        <Th>Id</Th>
+                                        <Th>Estado</Th>
+                                        <Th>Fecha</Th>
+                                        <Th>Id Obra</Th>
+                                        <Th>Descripcion obra</Th>
+                                        <Th>Id Cliente</Th>
+                                        <Th>Costo total</Th>
+                                    </Tr>
+                                </Thead>
+                                <Tbody>
+                                    {pedidos.map((e, i) => (
                                         <Tr
                                             key={i}
                                             id={`pedido-elem-${i}`}
@@ -227,8 +224,24 @@ export const RegistroPago = () => {
                                             <Td>$ {e.costoTotal}</Td>
                                         </Tr>
                                     ))}
-                            </Tbody>
-                        </Table>
+                                </Tbody>
+                            </Table>
+                        ) : (
+                            <div className="home-reload">
+                                <Tooltip hasArrow label="Recargar pedidos">
+                                    <IconButton
+                                        variant="ghost"
+                                        size="lg"
+                                        icon={<RepeatIcon />}
+                                        onClick={loadPedidos}
+                                        style={{ borderRadius: '50%' }}
+                                    />
+                                </Tooltip>
+                                <Text color="grey">
+                                    No se encontraron pedidos
+                                </Text>
+                            </div>
+                        )}
                     </ModalBody>
                     <ModalFooter>
                         <div className="control-btn-group">

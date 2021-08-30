@@ -17,3 +17,8 @@
 	justify-content: center;
 	gap: 1em;
 }
+.total-button-group{
+	display: flex;
+	justify-content: center;
+	gap: 1em;
+}
