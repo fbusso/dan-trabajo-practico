@@ -39,7 +39,7 @@ public class HttpServicioImpl implements HttpServicio {
         return dto;
     }
 
-    public void respuestaPorDefecto(Exception e) throws ReglaDeNegociosExcepcion {
+    public <T> T respuestaPorDefecto(Throwable t) throws ReglaDeNegociosExcepcion {
         throw new ErrorDeConexionExcepcion();
     }
 }
