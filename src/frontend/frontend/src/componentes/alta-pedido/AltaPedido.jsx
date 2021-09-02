@@ -134,7 +134,7 @@ export const AltaPedido = () => {
             })
             .catch((err) => console.log(err.response))
         if (response) {
-            setTimeout(() => history.push('/'), 2500)
+            setTimeout(() => history.push('/'), 1500)
             return toast({
                 title: 'El pedido se creó exitosamente.',
                 description: 'Será redireccionado a la pantalla de inicio.',
@@ -178,6 +178,7 @@ export const AltaPedido = () => {
             Cookies.set('token', token)
         }
         keycloak.init({ onLoad: 'login-required' }).then((authenticated) => {
+            keycloak.hasRealmRole('ROLE_COMPRADOR') && history.push('tienda')
             setAuth({ keycloak, authenticated })
             getSessionData()
         })

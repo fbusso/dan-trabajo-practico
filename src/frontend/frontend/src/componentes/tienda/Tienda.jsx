@@ -1,12 +1,29 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { StoreItem } from './item/store-item/StoreItem'
 import { Total } from './total/Total'
+import keycloak_config from '../../keycloak'
 import "./tienda.css"
 import { Heading } from '@chakra-ui/react'
 import { Cart } from './cart/Cart'
+import { useHistory } from 'react-router-dom'
 
 export let Tienda = () => {
-	return (
+	const history = useHistory()
+	const [auth, setAuth] = useState({
+			keycloak: null,
+			authenticated: false,
+	})
+	const keycloak = keycloak_config
+	useEffect(() => {
+		keycloak.init({ onLoad: 'login-required' }).then((authenticated) => {
+			if (!keycloak.hasRealmRole('ROLE_COMPRADOR')) {
+				history.replace('/')
+			}	
+			setAuth({ keycloak, authenticated })
+		})
+	}, [keycloak])
+
+	return auth.keycloak && auth.authenticated ? (
 		<div className="tienda-container">
 			<Heading>Cree su pedido</Heading>
 			<div className="tienda-card-group">
@@ -17,5 +34,5 @@ export let Tienda = () => {
 				</div>
 			</div>
 		</div>
-	)
+	) : null
 }

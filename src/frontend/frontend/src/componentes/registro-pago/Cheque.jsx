@@ -50,6 +50,7 @@ export const Cheque = () => {
             Cookies.set('token', token)
         }
         keycloak.init({ onLoad: 'login-required' }).then((authenticated) => {
+            keycloak.hasRealmRole('ROLE_COMPRADOR') && history.push('tienda')
             setAuth({ keycloak, authenticated })
             getSessionData()
         })
@@ -100,7 +101,7 @@ export const Cheque = () => {
             .catch((err) => console.log(err.response))
 
         if (response) {
-            setTimeout(() => history.push('/'), 2500)
+            setTimeout(() => history.push('/'), 1500)
             return toast({
                 title: 'El pago se realizó exitosamente.',
                 description: 'Será redireccionado a la pantalla de inicio.',
