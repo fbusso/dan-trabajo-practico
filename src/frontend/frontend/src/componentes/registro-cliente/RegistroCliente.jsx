@@ -156,7 +156,7 @@ export const RegistroCliente = () => {
             .catch((err) => {(err.response?.data && typeof err.response.data === 'string') && requestError.push(err.response?.data)})
 
         if(response){
-            setTimeout(() => history.push('/'), 2500)
+            setTimeout(() => history.push('/'), 1500)
             return toast({
                 title: 'El cliente se ha registrado con éxito.',
                 description: 'Será redireccionado a la pantalla de inicio.',
@@ -188,6 +188,7 @@ export const RegistroCliente = () => {
             Cookies.set('token', token)
         }
         keycloak.init({ onLoad: 'login-required' }).then((authenticated) => {
+            keycloak.hasRealmRole('ROLE_COMPRADOR') && history.push('tienda')
             setAuth({ keycloak, authenticated })
             getSessionData()
         })

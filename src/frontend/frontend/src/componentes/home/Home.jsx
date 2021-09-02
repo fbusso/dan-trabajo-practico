@@ -18,7 +18,7 @@ import {
     IconButton,
     Tooltip,
 } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import keycloak_config from '../../keycloak'
 import Cookies from 'js-cookie'
 import axios from 'axios'
@@ -27,6 +27,7 @@ import { RepeatIcon } from '@chakra-ui/icons'
 import './Home.css'
 
 export const Home = () => {
+    const history = useHistory()
     const [username, setUsername] = useState('')
     const [pedidos, setPedidos] = useState([])
     const [pagos, setPagos] = useState([])
@@ -77,6 +78,7 @@ export const Home = () => {
         
         keycloak.init({ onLoad: 'login-required' })
         .then((authenticated) => {
+            keycloak.hasRealmRole('ROLE_COMPRADOR') && history.push('tienda')
             setAuth({ keycloak, authenticated })
             getSessionData()
         })

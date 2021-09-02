@@ -98,6 +98,20 @@ services:
       - database
       - flyway-ms-usuario
 
+  # Microservicio de Usuarios
+  ms-pago:
+    container_name: ms-pago
+    build:
+      context: ./src/pago
+      dockerfile: Dockerfile
+    env_file:
+      - config.env
+    ports:
+      - "9014:9014"
+    depends_on:
+      - database
+      - flyway-ms-pago
+
   # Prometheus
   prometheus:
     container_name: prometheus
@@ -175,6 +189,16 @@ services:
     volumes:
       - ./src/usuario/src/main/resources/db/migration:/flyway/sql # Volumen de los archivos de migración
       - ./src/usuario/src/main/resources/db/config:/flyway/conf   # Volumen del archivo de configuración
+    depends_on:
+      - database
+
+  # Migración de Microservicio de Usuarios #
+  flyway-ms-pago:
+    image: flyway/flyway
+    command: migrate
+    volumes:
+      - ./src/pago/src/main/resources/db/migration:/flyway/sql # Volumen de los archivos de migración
+      - ./src/pago/src/main/resources/db/config:/flyway/conf   # Volumen del archivo de configuración
     depends_on:
       - database
 

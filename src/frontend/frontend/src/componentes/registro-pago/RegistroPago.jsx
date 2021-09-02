@@ -27,7 +27,7 @@ import {
 } from '@chakra-ui/react'
 import './registro-pago.css'
 import { SearchIcon, RepeatIcon } from '@chakra-ui/icons'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { path } from '../../pathConfig'
 import axios from 'axios'
 import Cookies from 'js-cookie'
@@ -47,6 +47,7 @@ let getFecha = () => {
 
 export const RegistroPago = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
+    const history = useHistory()
     const token = Cookies.get('token')
     const COLOR = 'yellow'
     let [pedidoSeleccionado, setPedidoSeleccionado] = useState({})
@@ -68,6 +69,7 @@ export const RegistroPago = () => {
             Cookies.set('token', token)
         }
         keycloak.init({ onLoad: 'login-required' }).then((authenticated) => {
+            keycloak.hasRealmRole('ROLE_COMPRADOR') && history.push('tienda')
             setAuth({ keycloak, authenticated })
             getSessionData()
         })
