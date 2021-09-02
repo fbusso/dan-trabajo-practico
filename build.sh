@@ -26,6 +26,11 @@ cd src/usuario
 mvn spring-boot:build-image -DskipTests=true
 cd ../../
 
+# Build de imagen de Microservicio de Pago
+cd src/pago
+mvn spring-boot:build-image -DskipTests=true
+cd ../../
+
 # Build de imagen de Microservicio de Proxy
 cd src/proxy
 mvn spring-boot:build-image -DskipTests=true
