@@ -24,7 +24,7 @@ export let StoreItem = () => {
 			setProductos(response?.data.content)
 		}
 		getItems()
-	}, [])
+	}, [token])
 
 	return(
 		<div className="item-list">

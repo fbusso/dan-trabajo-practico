@@ -17,6 +17,11 @@ import {
     Tr,
     IconButton,
     Tooltip,
+    Popover,
+    PopoverTrigger,
+    PopoverContent,
+    PopoverArrow,
+    PopoverBody
 } from '@chakra-ui/react'
 import { Link, useHistory } from 'react-router-dom'
 import keycloak_config from '../../keycloak'
@@ -52,6 +57,10 @@ export const Home = () => {
         // eslint-disable-next-line
     }, [])
 
+    let logout = () => {
+        keycloak.logout();
+    }
+
     let loadPagos = useCallback(async () => {
         let responsePagos = await axios
             .get(`${path.CUENTA}/pago`, {
@@ -69,11 +78,12 @@ export const Home = () => {
     useEffect(() => {
         let getSessionData = async () => {
             let { username } = await keycloak.loadUserProfile()
+            
+            await loadPedidos()
+            await loadPagos()
             let token = keycloak.token
             Cookies.set('token', token)
             setUsername(username)
-            await loadPedidos()
-            await loadPagos()
         }
         
         keycloak.init({ onLoad: 'login-required' })
@@ -84,6 +94,8 @@ export const Home = () => {
         })
         // eslint-disable-next-line
     }, [keycloak, loadPagos, loadPedidos])
+
+
 
     return auth.keycloak && auth.authenticated ? (
         <>
@@ -97,12 +109,25 @@ export const Home = () => {
                             <Text id="home-user">{username}</Text>
                             <Text id="home-role">ROL: {'EMPLEADO'}</Text>
                         </div>
-                        <Avatar
-                            bg="red.500"
-                            size="md"
-                            name={username}
-                            color="white"
-                        />
+                        <Popover>
+                            <PopoverTrigger>
+                                <Avatar
+                                    bg="red.500"
+                                    size="md"
+                                    name={username}
+                                    color="white"
+                                    className="home-avatar"
+                                />
+                            </PopoverTrigger>
+                            <PopoverContent style={{width: '7em'}}>
+                                <PopoverArrow />
+                                <PopoverBody>
+                                <Button onClick={logout}>
+                                    Logout
+                                </Button>
+                                </PopoverBody>
+                            </PopoverContent>
+                        </Popover>
                     </div>
                 </div>
                 <div className="home-panel">
