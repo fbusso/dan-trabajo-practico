@@ -16,10 +16,10 @@ export let Tienda = () => {
 	const keycloak = keycloak_config
 	useEffect(() => {
 		keycloak.init({ onLoad: 'login-required' }).then((authenticated) => {
+			setAuth({ keycloak, authenticated })
 			if (!keycloak.hasRealmRole('ROLE_COMPRADOR')) {
 				history.replace('/')
 			}	
-			setAuth({ keycloak, authenticated })
 		})
 	}, [keycloak])
 

@@ -36,7 +36,7 @@ export let Item = ({ id, nombre, descripcion, precio }) => {
 
 					<Badge className="item-price" colorScheme="blue">
 						$ {precio}
-						</Badge>
+					</Badge>
 			</Box>
 		</Box>
    )

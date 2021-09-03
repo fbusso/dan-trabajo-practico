@@ -28,7 +28,7 @@ export let StoreItem = () => {
 
 	return(
 		<div className="item-list">
-			{productos && productos.map((item) => (
+			{productos?.length && productos.map((item) => (
 				<Item
 					key={item.id}
 					id={item.id}

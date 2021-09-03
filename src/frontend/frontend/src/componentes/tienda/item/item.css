@@ -7,6 +7,7 @@
 .card-item{
 	margin: 1em;
 	width: 11em;
+	position:relative;
 }
 
 .image-container{
@@ -45,14 +46,16 @@
 .item-price{
 	align-self: flex-end;
 	width: fit-content;
+	position: absolute;
+	right: 0;
+	bottom: 0
 }
 
 .css-rmlqu9{
 	display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
-}
-
-.css-rmlqu9{
 	padding: 0.5em !important;
 }
+
+
