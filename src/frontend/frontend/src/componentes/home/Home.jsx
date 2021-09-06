@@ -77,12 +77,11 @@ export const Home = () => {
 
     useEffect(() => {
         let getSessionData = async () => {
-            let { username } = await keycloak.loadUserProfile()
-            
-            await loadPedidos()
-            await loadPagos()
             let token = keycloak.token
             Cookies.set('token', token)
+            let { username } = await keycloak.loadUserProfile()
+            await loadPedidos()
+            await loadPagos()
             setUsername(username)
         }
         
